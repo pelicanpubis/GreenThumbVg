@@ -23,5 +23,10 @@ namespace GreenThumbVg
         {
             InitializeComponent();
         }
+
+        private void lstPlantDetails_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

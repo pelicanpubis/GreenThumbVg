@@ -13,13 +13,18 @@ namespace GreenThumbVg.User
     {
 
         public static List<IUser> Users { get; private set; } = new List<IUser>
-    {
-        new User("user", "password", new List<PlantModel>
+{
+        new User("user", "password")
+        {
+        Plants = new List<PlantModel> // Assuming Plants is a property in User class
         {
             new PlantModel("Rose") // Creating PlantModel with a name
-        })
-        // Add more users with plants if required
-    };
+        }
+    },
+    // Add more users with plants if required
+};
+
+      
 
 
         //public static List<IUser> Users { get; private set; } = new()
@@ -37,14 +42,14 @@ namespace GreenThumbVg.User
         public static IUser? SignedInUser { get; private set; }
 
         //denna metoden registrerar en ny user
-        public static User? RegisterUser(string username, string password, List<PlantModel> plants)
+        public static User? RegisterUser(string username, string password)
         {
 
             //kontrollerar om det nya användar namnet är ''valid''
             if (ValidateUsername(username))
             {
                 //om det är valid så skapas en ny user objekt och initialiserar dens properties
-                User newUser = new User(username, password, plants)
+                User newUser = new User(username, password)
                 {
                     Plants = new List<PlantModel>()
                 };

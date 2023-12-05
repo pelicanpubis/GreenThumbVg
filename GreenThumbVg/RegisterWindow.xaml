@@ -96,7 +96,7 @@
             Content="Sign Up!"
             Background="DarkSeaGreen"
             FontWeight="Bold"
-            Foreground="SlateBlue"/>
+            Foreground="SlateBlue" Click="btnSignUp_Click"/>
 
 
     </Grid>

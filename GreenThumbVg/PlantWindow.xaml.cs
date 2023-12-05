@@ -50,9 +50,24 @@ namespace GreenThumbVg
             }
         }
 
-        private void lstPlants_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void txtPlantSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchTerm = txtPlantSearch.Text.ToLower(); // Användarens inmatning
+            //string searchTerm = txtPlantSearch.Text.ToLower(); // Användarens inmatning
+
+            //lstPlants.Items.Clear();
+
+            //var filteredPlants = allPlants.Where(p => p.NameOfPlant.ToLower().Contains(searchTerm));
+
+            //foreach (var plant in filteredPlants)
+            //{
+            //    ListViewItem item = new();
+            //    item.Tag = plant;
+            //    item.Content = plant.NameOfPlant;
+
+            //    lstPlants.Items.Add(item);
+            //}
+
+            string searchTerm = txtPlantSearch.Text.ToLower(); // User input
 
             lstPlants.Items.Clear();
 
@@ -60,7 +75,7 @@ namespace GreenThumbVg
 
             foreach (var plant in filteredPlants)
             {
-                ListViewItem item = new();
+                ListViewItem item = new ListViewItem();
                 item.Tag = plant;
                 item.Content = plant.NameOfPlant;
 
@@ -73,6 +88,41 @@ namespace GreenThumbVg
             // Öppna AddPlant-orderfönstret här
             AddPlantWindow addPlantWindow = new AddPlantWindow();
             addPlantWindow.Show();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstPlants.SelectedItem != null)
+            {
+                // Hämta den valda växten från listan
+                PlantModel selectedPlant = (PlantModel)((ListViewItem)lstPlants.SelectedItem).Tag;
+
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {selectedPlant.NameOfPlant}?", "Confirmation", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Ta bort växten från listan
+                    lstPlants.Items.Remove(lstPlants.SelectedItem);
+
+                    // Ta bort den valda växten från databasen
+                    using (GreenThumbVgDbContext context = new())
+                    {
+                        PlantRepository<PlantModel> plantRepository = new(context);
+                        plantRepository.Delete(selectedPlant);
+
+                        // Ta bort tillhörande skötselråd från databasen
+                        // Du måste anpassa detta beroende på hur din databas är strukturerad
+                        // Till exempel, om det finns en separat tabell för skötselråd relaterade till växter
+                        // kan du använda plantRepository.DeleteCareInstructions(selectedPlant);
+                    }
+
+                    MessageBox.Show($"{selectedPlant.NameOfPlant} has been deleted.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a plant to delete.");
+            }
         }
     }
 }

@@ -26,6 +26,12 @@ namespace GreenThumbVg.Database
         {
             base.OnModelCreating(modelBuilder);
 
+    //        //kanske onödig
+    //        modelBuilder.Entity<InstructionModel>()
+    //.HasOne(i => i.Plant)
+    //.WithMany(p => p.Instructions)
+    //.HasForeignKey(i => i.PlantId);
+
             modelBuilder.Entity<PlantModel>()
         .HasIndex(p => p.NameOfPlant)
         .IsUnique();
@@ -61,114 +67,8 @@ namespace GreenThumbVg.Database
    );
 
 
-            //modelBuilder.Entity<InstructionModel>()
-            //         .HasData(new InstructionModel()
-            //         {
-            //             InstructionId = 1,
-            //             NameOfInstruction = "Vattning",
-            //             Instruction = " Undvik att övervattna eller låta jorden bli för torr. Anpassa vattningen efter växtens behov och jordens fuktighet. Stick ner fingret i jorden för att känna om den behöver vatten.",
-            //             PlantId = 1
-
-
-            //         },
-            //         new InstructionModel()
-            //         {
-            //             InstructionId = 2,
-            //             NameOfInstruction = "Ljus",
-            //             Instruction = "Placera växter på platser där de får tillräckligt med ljus enligt deras specifika krav. Vissa behöver direkt solljus medan andra trivs bättre i skugga.",
-            //             PlantId = 2
-
-
-            //         },
-
-            //            new InstructionModel()
-            //            {
-            //                InstructionId = 3,
-            //                NameOfInstruction = "Skötselråd:",
-            //                Instruction = "Placering: Soligt till halvskugga. Bevattning: Måttlig, undvik vattenloggning i jorden. Efter blomning: Klipp av blomstjälken och låt löken vila för nästa säsong.",
-            //                PlantId = 3
-
-
-            //            }
-
-            //         );
 
         }
     }
 }
-
-
-
-
-
-
-
-
-
-//        protected override void OnModelCreating(ModelBuilder modelBuilder)
-//        {
-//            base.OnModelCreating(modelBuilder);
-
-//            modelBuilder.Entity<PlantModel>()
-//        .HasIndex(p => p.NameOfPlant)
-//        .IsUnique();
-
-//            //modelBuilder.Entity<PlantModel>()
-//            //          .HasData(new PlantModel()
-//            //          {
-//            //              PlantId = 1,
-//            //              NameOfPlant = "Sunflower",
-
-
-//            //          },
-
-//            //          new PlantModel()
-//            //          {
-//            //              PlantId = 2,
-//            //              NameOfPlant = "Roses"
-//            //          },
-//            //             new PlantModel()
-//            //             {
-//            //                 PlantId = 3,
-//            //                 NameOfPlant = "Tulips"
-//            //             }
-
-//            //          );
-
-
-//            modelBuilder.Entity<InstructionModel>()
-//                     .HasData(new InstructionModel()
-//                     {
-//                         InstructionId = 1,
-//                         NameOfInstruction = "Vattning",
-//                         Instruction = "Placering: Soligt läge med direkt solljus. Bevattning: Regelbunden, särskilt under torra perioder. Jorden: Väldränerad och näringsrik jord.",
-//                         PlantId = 1
-
-
-//                     },
-//                     new InstructionModel()
-//                     {
-//                         InstructionId = 2,
-//                         NameOfInstruction = "Skötselråd:",
-//                         Instruction = "Placering: Soligt läge. Bevattning: Regelbunden, undvik blöta blad. Beskärning: Ta bort döda eller skadade grenar regelbundet.",
-//                         PlantId = 2
-
-
-//                     },
-
-//                        new InstructionModel()
-//                        {
-//                            InstructionId = 3,
-//                            NameOfInstruction = "Skötselråd:",
-//                            Instruction = "Placering: Soligt till halvskugga. Bevattning: Måttlig, undvik vattenloggning i jorden. Efter blomning: Klipp av blomstjälken och låt löken vila för nästa säsong.",
-//                            PlantId = 3
-
-
-//                        }
-
-//                     );
-
-//        }
-//    }
-//}
 

@@ -61,6 +61,7 @@
     Grid.ColumnSpan="3"
     Height="20"
     Margin="10,14,10,15" 
+            TextChanged="txtPlantSearch_TextChanged"
     />
 
 
@@ -71,7 +72,7 @@
             Grid.Column="4"
             Grid.ColumnSpan="4"
             Grid.RowSpan="8" 
-            Margin="103,39,1,49" Grid.Row="1" SelectionChanged="lstPlants_SelectionChanged"/>
+            Margin="103,39,1,49" Grid.Row="1"/>
 
 
 
@@ -82,7 +83,7 @@
             Content="Delete"
             FontSize="12"
             Background="Crimson"
-            Margin="10"/>
+            Margin="10" Click="btnDelete_Click"/>
 
         <Button 
             Name="btnAddPlant"

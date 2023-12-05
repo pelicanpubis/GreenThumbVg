@@ -39,6 +39,12 @@ namespace GreenThumbVg.Respitory
             await _dbSet.AddAsync(entity);
         }
 
+        public async Task Delete(T entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
 
     }
 

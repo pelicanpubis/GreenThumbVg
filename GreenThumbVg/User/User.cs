@@ -16,11 +16,10 @@ namespace GreenThumbVg.User
         public string Password { get; set; }
         public List<PlantModel> Plants { get; set; }
 
-        public User(string username, string password, List<PlantModel> plants)
+        public User(string username, string password)
         {
             Username = username;
             Password = password;
-            Plants = plants;
         }
 
 
