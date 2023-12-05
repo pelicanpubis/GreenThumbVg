@@ -144,25 +144,16 @@
     Background="LightBlue"
     Margin="10" Click="btnAddInstruction_Click"/>
 
-        <Button
-    Name="btnSavePlant"
-    Grid.Column="2"
-    Grid.Row="7"
-    Grid.ColumnSpan="2"
-    Content="Save Plant"
-    FontSize="12"
-    Background="LightGreen"
-    Margin="10" />
 
         <Button 
-            Name="btnAddPlant"
-            Grid.Column="2"
-            Grid.Row="8"
-            Grid.ColumnSpan="2"
-            Content="Add Plant"
-            FontSize="12"
-            Background="LightGreen"
-            Margin="10" Click="btnAddPlant_Click" />
+      Name="btnGoBack"
+      Grid.Column="6"
+      Grid.Row="8"
+      Grid.ColumnSpan="2"
+      Content="Go back to plant window"
+      FontSize="12"
+      Background="Pink"
+      Margin="10" Click="btnGoBack_Click"/>
 
     </Grid>
 </Window>

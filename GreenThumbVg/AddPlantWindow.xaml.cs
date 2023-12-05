@@ -107,6 +107,15 @@ namespace GreenThumbVg
             }
         }
 
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            PlantWindow plantWindow = new PlantWindow();
+            plantWindow.Show();
+
+            // För att stänga det aktuella AddPlantWindow-fönstret när du visar PlantWindow
+            this.Close();
+        }
+
         //private void RefreshListView()
         //{
         //    using (GreenThumbVgDbContext context = new())

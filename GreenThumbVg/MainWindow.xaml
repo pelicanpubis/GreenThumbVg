@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbVg"
         mc:Ignorable="d"
-                         Title="MainWindow" Height="450" Width="800" Background="MediumSlateBlue" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+                         Title="MainWindow" Height="450" Width="800" Background="LightGreen" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -25,7 +25,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="UltraBold" Foreground="White" Content="TRAVELPAL" FontFamily="Arial"/>
+        <Label Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="UltraBold" Foreground="White" Content="GreenThumb" FontFamily="Arial"/>
         <Label  Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Content="Username"/>
         <Label  Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Content="Password"/>
 

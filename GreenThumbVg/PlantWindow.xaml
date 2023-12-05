@@ -101,6 +101,6 @@
     Content="Details"
     FontSize="12"
     Background="LightBlue"
-    Margin="0,10,18,10"/>
+    Margin="0,10,18,10" Click="btnDetails_Click"/>
     </Grid>
 </Window>

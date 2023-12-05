@@ -52,20 +52,7 @@ namespace GreenThumbVg
 
         private void txtPlantSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //string searchTerm = txtPlantSearch.Text.ToLower(); // Användarens inmatning
-
-            //lstPlants.Items.Clear();
-
-            //var filteredPlants = allPlants.Where(p => p.NameOfPlant.ToLower().Contains(searchTerm));
-
-            //foreach (var plant in filteredPlants)
-            //{
-            //    ListViewItem item = new();
-            //    item.Tag = plant;
-            //    item.Content = plant.NameOfPlant;
-
-            //    lstPlants.Items.Add(item);
-            //}
+         
 
             string searchTerm = txtPlantSearch.Text.ToLower(); // User input
 
@@ -88,6 +75,8 @@ namespace GreenThumbVg
             // Öppna AddPlant-orderfönstret här
             AddPlantWindow addPlantWindow = new AddPlantWindow();
             addPlantWindow.Show();
+
+            this.Close();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -122,6 +111,24 @@ namespace GreenThumbVg
             else
             {
                 MessageBox.Show("Please select a plant to delete.");
+            }
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (lstPlants.SelectedItem != null)
+            {
+                ListViewItem selectedListViewItem = (ListViewItem)lstPlants.SelectedItem;
+                PlantModel selectedPlant = (PlantModel)selectedListViewItem.Tag;
+
+                // Öppna PlantDetailsWindow och skicka med den valda växtens information
+                PlantDetailsWindow plantDetailsWindow = new PlantDetailsWindow(selectedPlant);
+                plantDetailsWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj en växt för att visa detaljer.");
             }
         }
     }
