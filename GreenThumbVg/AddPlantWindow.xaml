@@ -5,21 +5,164 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbVg"
         mc:Ignorable="d"
-         Title="Add Plant" Height="300" Width="400">
+          Title="Add Plant Window" Height="450" Width="800" Background="BlanchedAlmond" ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Växtnamn:"/>
-        <TextBox x:Name="txtNameOfPlant" Grid.Row="0" Margin="5"/>
+        <!-- Kundinformation -->
 
-        <Label Grid.Row="1" Content="Skötselråd:"/>
-        <TextBox x:Name="txtCare" Grid.Row="1" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <Label 
+     Grid.Column="6"
+     Grid.Row="1"
+     Content="Added Instructions"
+     FontSize="16"
+     Padding="0"
+     VerticalAlignment="Top" Margin="0,18,54,0" Grid.ColumnSpan="2"/>
 
-        <Button Grid.Row="3" Content="Spara"  HorizontalAlignment="Center" Margin="5"/>
+        <Label 
+            Grid.Column="1"
+            Grid.Row="3"
+            Content="Name of Plant"
+            FontSize="16"
+            Padding="0"
+            VerticalAlignment="Center"/>
+
+        <Label
+       Grid.Row="4"
+       Content="Instruction Name"
+       FontSize="16"
+       Padding="0"
+       VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="10,0,108,0"/>
+
+        <Label 
+            Grid.Column="1"
+            Grid.Row="5"
+            Content="Instruction"
+            FontSize="16"
+            Padding="0"
+            VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="10,0,98,0"/>
+
+
+
+        <TextBox 
+    Name="txtInstructionName"
+    Grid.Column="2"
+    Grid.Row="4" 
+    Grid.ColumnSpan="3"
+    Height="20"
+    Margin="0 0 10 0"/>
+
+        <TextBox 
+            Name="txtNameOfPlant"
+            Grid.Column="2"
+            Grid.Row="3" 
+            Grid.ColumnSpan="3"
+            Height="20"
+            Margin="0 0 10 0"/>
+
+        <TextBox 
+            Name="txtInstruction"
+            Grid.Column="2"
+            Grid.Row="5" 
+            Grid.ColumnSpan="3"
+            Height="20"
+            Margin="0 0 10 0"/>
+
+        <!--<ListView Name="lstPlants" Grid.Column="4" Grid.ColumnSpan="4" Grid.RowSpan="8" Margin="103,39,1,49" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Plant Name" DisplayMemberBinding="{Binding NameOfPlant}" Width="150"/>
+                    <GridViewColumn Header="Instructions" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Instructions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding NameOfInstruction}"/>
+                                                <TextBlock Text="{Binding Instruction}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+
+        <ListView 
+            Name="lstPlants"
+            Grid.Column="4"
+            Grid.ColumnSpan="4"
+            Grid.RowSpan="8" 
+            Margin="103,39,1,49" Grid.Row="1"/>
+
+
+        <!-- Valideringsmeddelanden (om några) -->
+
+        <TextBlock 
+            x:Name="txtValidationMessage"
+            Grid.Column="2"
+            Grid.Row="7"
+            Grid.ColumnSpan="3"
+            Foreground="Red"
+            Margin="0 5 0 0"/>
+
+        <!-- Beställningsknapp -->
+
+
+        <Button
+    Name="btnAddInstruction"
+    Grid.Column="2"
+    Grid.Row="6"
+    Content="Add Instruction"
+    FontSize="12"
+    Background="LightBlue"
+    Margin="10" Click="btnAddInstruction_Click"/>
+
+        <Button
+    Name="btnSavePlant"
+    Grid.Column="2"
+    Grid.Row="7"
+    Grid.ColumnSpan="2"
+    Content="Save Plant"
+    FontSize="12"
+    Background="LightGreen"
+    Margin="10" />
+
+        <Button 
+            Name="btnAddPlant"
+            Grid.Column="2"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Content="Add Plant"
+            FontSize="12"
+            Background="LightGreen"
+            Margin="10" Click="btnAddPlant_Click" />
+
     </Grid>
 </Window>
