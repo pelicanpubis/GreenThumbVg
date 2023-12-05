@@ -25,9 +25,8 @@ namespace GreenThumbVg
         {
             InitializeComponent();
             txtName.Text = plantDetails.NameOfPlant;
-
-
            
+
 
             using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
             {
@@ -39,6 +38,15 @@ namespace GreenThumbVg
                 txtInstructions.Text = instructionsText;
             }
 
+        }
+
+        private void btnAddToGarden_Click(object sender, RoutedEventArgs e)
+        {
+            // Öppna AddPlant-orderfönstret här
+            MyGardenWindow myGardenWindow = new MyGardenWindow();
+            myGardenWindow.Show();
+
+            this.Close();
         }
     }
 }

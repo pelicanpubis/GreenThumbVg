@@ -7,14 +7,24 @@
         mc:Ignorable="d"
                             Title="Plant Details Window" Height="400" Width="550" Background="LightBlue">
     <Grid>
-        <Label Content="Name:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0" />
+        <Label Content="Name Of Plant:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0" />
         <TextBox Name="txtName" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="180,20,0,0" IsReadOnly="True"/>
+        <Label Content="Name Of Instruktion:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,67,0,0" />
+        <TextBox Name="txtInstructionName" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0,67,0,0" IsReadOnly="True" Height="26"/>
 
-        <Label Content="Instructions:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,60,0,0" />
-        <TextBox Name="txtInstructions" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="180,60,0,0" IsReadOnly="True"/>
+        <Label Content="Instructions:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="28,98,0,0" />
+        <TextBox Name="txtInstructions" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0,111,0,0" IsReadOnly="True" Height="177"/>
 
 
-
+        <Button 
+            Content="Add to Garden" Name="btnAddToGarden" 
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Width="120"
+            Height="30"
+            Margin="140,310,0,0" Click="btnAddToGarden_Click"
+           
+        />
 
 
 
@@ -26,7 +36,7 @@
                 Height="30"
                 Margin="20,310,0,0" 
                   />
-        
+
 
 
     </Grid>

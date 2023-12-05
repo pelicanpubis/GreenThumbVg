@@ -1,0 +1,67 @@
+﻿<Window x:Class="GreenThumbVg.MyGardenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GreenThumbVg"
+        mc:Ignorable="d"
+      Title="My Garden Window" Height="450" Width="800" Background="BlanchedAlmond" ResizeMode="NoResize">
+    <Grid>
+        <!--Grid-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--Element-->
+
+        <Label 
+  Grid.Column="4"
+  Grid.ColumnSpan="3"
+  Grid.Row="1"
+  Content="My Garden Plants"
+  FontSize="16"
+  Padding="0"
+  VerticalAlignment="Top" Margin="0,10,108,0"/>
+
+
+
+
+
+
+
+
+        <ListView 
+            Name="lstMyGardenPlants"
+            Grid.Column="2"
+            Grid.ColumnSpan="5"
+            Grid.RowSpan="8" 
+            Margin="108,39,0,49" Grid.Row="1" HorizontalAlignment="Left" Width="359"/>
+
+
+
+
+
+
+
+    </Grid>
+</Window>
