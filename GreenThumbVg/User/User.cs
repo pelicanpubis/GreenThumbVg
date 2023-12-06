@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenThumbVg.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbVg.User
 {
@@ -23,7 +24,8 @@ namespace GreenThumbVg.User
             Password = password;
         }
 
-
+        // Method to get garden plants for a specific user
+    
 
         //första
         //public string Username { get; set; } // required?

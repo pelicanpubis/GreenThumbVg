@@ -5,6 +5,9 @@ namespace GreenThumbVg.Database
 {
     public class GreenThumbVgDbContext : DbContext
     {
+
+
+
         // Konstruktör för att skapa en instans av kontexten
         public GreenThumbVgDbContext()
         {

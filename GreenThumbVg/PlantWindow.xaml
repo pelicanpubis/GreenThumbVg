@@ -75,7 +75,16 @@
             Margin="103,39,1,49" Grid.Row="1"/>
 
 
-
+        <Button 
+    Name="btnMyGarden"
+    Grid.Column="4"
+    Grid.Row="8"
+    Content="Delete"
+    FontSize="12"
+    Background="Pink"
+    Margin="10" Click="btnMyGarden_Click"/>
+        
+        
         <Button 
             Name="btnDelete"
             Grid.Column="7"

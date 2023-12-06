@@ -141,5 +141,13 @@ namespace GreenThumbVg
                 MessageBox.Show("Vänligen välj en växt för att visa detaljer.");
             }
         }
+
+        private void btnMyGarden_Click(object sender, RoutedEventArgs e)
+        {
+            // Assuming you have some identifier for the user to filter the garden plants, e.g., user ID
+
+
+
+        }
     }
 }
