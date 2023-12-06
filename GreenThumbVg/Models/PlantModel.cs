@@ -16,8 +16,10 @@ namespace GreenThumbVg.Models
 
        public List<InstructionModel> Instructions { get; set; } = new();
 
+        public List<GardenPlant> GardenPlants { get; set; } = new();
 
-        //  public List<PlantInstructionModel> PlantInstructions { get; set; } = new();
+
+
 
 
         public PlantModel()

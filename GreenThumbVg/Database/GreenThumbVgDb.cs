@@ -10,10 +10,14 @@ namespace GreenThumbVg.Database
         {
 
         }
+        public DbSet<GardenModel> Gardens { get; set; }
 
         public DbSet<PlantModel> Plants { get; set; }
 
         public DbSet<InstructionModel> Instructions { get; set; }
+
+        public DbSet<GardenPlant> GardenPlants { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,11 +30,24 @@ namespace GreenThumbVg.Database
         {
             base.OnModelCreating(modelBuilder);
 
-    //        //kanske onödig
-    //        modelBuilder.Entity<InstructionModel>()
-    //.HasOne(i => i.Plant)
-    //.WithMany(p => p.Instructions)
-    //.HasForeignKey(i => i.PlantId);
+            modelBuilder.Entity<GardenPlant>()
+               .HasKey(gp => new { gp.GardenId, gp.PlantId });
+
+            modelBuilder.Entity<GardenPlant>()
+                .HasOne(gp => gp.Garden)
+                .WithMany(g => g.GardenPlants)
+                .HasForeignKey(gp => gp.GardenId);
+
+            modelBuilder.Entity<GardenPlant>()
+                .HasOne(gp => gp.Plant)
+                .WithMany(p => p.GardenPlants)
+                .HasForeignKey(gp => gp.PlantId);
+
+            //        //kanske onödig
+            //        modelBuilder.Entity<InstructionModel>()
+            //.HasOne(i => i.Plant)
+            //.WithMany(p => p.Instructions)
+            //.HasForeignKey(i => i.PlantId);
 
             modelBuilder.Entity<PlantModel>()
         .HasIndex(p => p.NameOfPlant)

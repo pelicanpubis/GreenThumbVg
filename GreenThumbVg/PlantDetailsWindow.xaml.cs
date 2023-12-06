@@ -42,7 +42,7 @@ namespace GreenThumbVg
 
         private void btnAddToGarden_Click(object sender, RoutedEventArgs e)
         {
-            // Öppna AddPlant-orderfönstret här
+            // Öppna MygardenWindowPlant-orderfönstret här
             MyGardenWindow myGardenWindow = new MyGardenWindow();
             myGardenWindow.Show();
 
