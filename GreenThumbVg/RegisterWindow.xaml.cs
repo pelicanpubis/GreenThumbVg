@@ -66,11 +66,7 @@ namespace GreenThumbVg
 
                 if (username != "" && password != "" )
                 {
-                    // Skapa en user
-                    //  User newUser = new User(username, password);
-
-                    //User newUser = UserManager.RegisterUser(username, password);
-                   // User newUser = UserManager.RegisterUser(username, password);
+                   
                     GreenThumbVg.User.User newUser = UserManager.RegisterUser(username, password);
 
 

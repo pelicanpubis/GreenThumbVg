@@ -34,7 +34,7 @@ namespace GreenThumbVg.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<GardenPlant>()
-               .HasKey(gp => new { gp.GardenId, gp.PlantId });
+               .HasKey(gp => new { gp.GardenId, gp.PlantId }); // Primärnyckel för GardenPlant
 
             // Konfigurera primärnycklar och relationer mellan tabellerna
             modelBuilder.Entity<GardenPlant>()
