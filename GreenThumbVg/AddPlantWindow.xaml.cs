@@ -38,29 +38,37 @@ namespace GreenThumbVg
 
         private void btnAddInstruction_Click(object sender, RoutedEventArgs e)
         {
-
+            // Kontrollerar om alla nödvändiga fält är ifyllda innan instruktionen läggs till
             if (string.IsNullOrWhiteSpace(txtNameOfPlant.Text) || string.IsNullOrWhiteSpace(txtInstruction.Text) || string.IsNullOrWhiteSpace(txtInstructionName.Text))
             {
                 txtValidationMessage.Text = "Alla fält måste matas in.";
                 return;
             }
 
+
+            // Hämtar information från textfälten
             string name = txtNameOfPlant.Text;
             string instructionName = txtInstructionName.Text;
             string instruction = txtInstruction.Text;
 
             try
             {
+                // Ansluter till databasen
                 using (GreenThumbVgDbContext context = new())
                 {
+                    // Hämtar befintlig växt från databasen om den finns
                     var existingPlant = context.Plants.Include(p => p.Instructions).FirstOrDefault(p => p.NameOfPlant == name);
 
+                    // Om växten redan finns läggs en ny instruktion till dess lista av instruktioner
                     if (existingPlant != null)
                     {
                         existingPlant.Instructions.Add(new InstructionModel { NameOfInstruction = instructionName, Instruction = instruction });
                         context.SaveChanges();
-                        RefreshListView(existingPlant);
+                        RefreshListView(existingPlant);  // Uppdaterar listan med instruktioner
                     }
+
+
+                    // Om växten inte finns skapas en ny växt med den nya instruktionen
                     else
                     {
                         var newPlant = new PlantModel
@@ -96,12 +104,14 @@ namespace GreenThumbVg
 
         }
 
+        // Uppdaterar listan med växter och deras instruktioner
         private void RefreshListView(PlantModel plant = null)
         {
             lstPlants.ItemsSource = null;
 
             if (plant != null)
             {
+                // Skapar en lista av instruktioner för en specifik växt och visar den i listan i fönstret
                 var instructions = plant.Instructions.Select(instruction => $"{instruction.NameOfInstruction}: {instruction.Instruction}").ToList();
                 lstPlants.ItemsSource = instructions;
             }
@@ -116,14 +126,7 @@ namespace GreenThumbVg
             this.Close();
         }
 
-        //private void RefreshListView()
-        //{
-        //    using (GreenThumbVgDbContext context = new())
-        //    {
-        //        var plantsWithInstructions = context.Plants.Include(p => p.Instructions).ToList();
-        //        lstPlants.ItemsSource = plantsWithInstructions;
-        //    }
-        //}
+      
     }
     }
 

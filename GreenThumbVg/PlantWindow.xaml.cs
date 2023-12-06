@@ -3,6 +3,7 @@ using GreenThumbVg.Models;
 using GreenThumbVg.Respitory;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,22 +23,28 @@ namespace GreenThumbVg
     /// </summary>
     public partial class PlantWindow : Window
     {
+
+
+        // En lista för alla växter
         private List<PlantModel> allPlants;
 
         public PlantWindow()
         {
             InitializeComponent();
+
+            // Laddar växterna asynkront när fönstret skapas
             LoadPlantsAsync();
 
 
-            async void LoadPlantsAsync()
+            async void LoadPlantsAsync() // Asynkron metod för att ladda växter från databasen
             {
                 using (GreenThumbVgDbContext context = new())
                 {
                     PlantRepository<PlantModel> plantRepository = new(context);
 
-                    allPlants = await plantRepository.GetAll();
+                    allPlants = await plantRepository.GetAll(); // Hämtar alla växter från databasen
 
+                    // Lägger till växterna i listan i fönstret
                     foreach (var plant in allPlants)
                     {
                         ListViewItem item = new();
@@ -56,10 +63,13 @@ namespace GreenThumbVg
 
             string searchTerm = txtPlantSearch.Text.ToLower(); // User input
 
-            lstPlants.Items.Clear();
+            lstPlants.Items.Clear(); // Rensar listan för att visa filtrerade växter
 
+            // Filtrerar växter baserat på användarens sökterm
             var filteredPlants = allPlants.Where(p => p.NameOfPlant.ToLower().Contains(searchTerm));
 
+
+            // Lägger till de filtrerade växterna i listan i fönstret
             foreach (var plant in filteredPlants)
             {
                 ListViewItem item = new ListViewItem();
