@@ -5,11 +5,13 @@ namespace GreenThumbVg.Database
 {
     public class GreenThumbVgDbContext : DbContext
     {
-
+        // Konstruktör för att skapa en instans av kontexten
         public GreenThumbVgDbContext()
         {
 
         }
+
+        // DbSet för varje entitet som ska ingå i databasen
         public DbSet<GardenModel> Gardens { get; set; }
 
         public DbSet<PlantModel> Plants { get; set; }
@@ -19,6 +21,7 @@ namespace GreenThumbVg.Database
         public DbSet<GardenPlant> GardenPlants { get; set; }
 
 
+        // Metod som konfigurerar anslutningssträngen till databasen
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -33,6 +36,7 @@ namespace GreenThumbVg.Database
             modelBuilder.Entity<GardenPlant>()
                .HasKey(gp => new { gp.GardenId, gp.PlantId });
 
+            // Konfigurera primärnycklar och relationer mellan tabellerna
             modelBuilder.Entity<GardenPlant>()
                 .HasOne(gp => gp.Garden)
                 .WithMany(g => g.GardenPlants)
@@ -41,13 +45,14 @@ namespace GreenThumbVg.Database
             modelBuilder.Entity<GardenPlant>()
                 .HasOne(gp => gp.Plant)
                 .WithMany(p => p.GardenPlants)
-                .HasForeignKey(gp => gp.PlantId);
+                .HasForeignKey(gp => gp.PlantId); 
+            
 
-            //        //kanske onödig
-            //        modelBuilder.Entity<InstructionModel>()
-            //.HasOne(i => i.Plant)
-            //.WithMany(p => p.Instructions)
-            //.HasForeignKey(i => i.PlantId);
+            //nyligen tillagds
+            modelBuilder.Entity<InstructionModel>()
+    .HasOne(i => i.Plant)
+    .WithMany(p => p.Instructions) // En växt kan ha flera instruktioner
+    .HasForeignKey(i => i.PlantId); // Foreign key för Plant i InstructionModel
 
             modelBuilder.Entity<PlantModel>()
         .HasIndex(p => p.NameOfPlant)
