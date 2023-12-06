@@ -1,4 +1,5 @@
 ﻿using GreenThumbVg.Database;
+using GreenThumbVg.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,19 @@ namespace GreenThumbVg.Respitory
         {
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public void AddPlantAndInstructionsToGarden(PlantModel plant)
+        {
+            // Here you would add the plant and its instructions to your ListView
+            // For instance:
+            // listViewPlants.Items.Add(plant);
+
+            using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
+            {
+                context.Plants.Add(plant); // Save the plant to the database
+                context.SaveChanges();
+            }
         }
 
 

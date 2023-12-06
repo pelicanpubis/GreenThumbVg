@@ -83,6 +83,19 @@ namespace GreenThumbVg.Database
        }
    );
 
+            modelBuilder.Entity<GardenModel>().HasData(
+    new GardenModel { GardenId = 1 }, // Lägg till önskade egenskaper för varje trädgård här
+    new GardenModel { GardenId = 2 }
+    // ... Fortsätt med fler exempel på trädgårdar om det behövs
+);
+
+            modelBuilder.Entity<GardenPlant>().HasData(
+    new GardenPlant { GardenId = 1, PlantId = 1 }, // Lägg till önskade egenskaper för varje GardenPlant här
+    new GardenPlant { GardenId = 2, PlantId = 2 }
+    // ... Fortsätt med fler exempel på GardenPlant om det behövs
+);
+
+
 
 
         }

@@ -3,6 +3,7 @@ using GreenThumbVg.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenThumbVg.Migrations
 {
     [DbContext(typeof(GreenThumbVgDbContext))]
-    partial class GreenThumbVgDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206132751_GardenIdidatabasen")]
+    partial class GardenIdidatabasen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,18 +60,6 @@ namespace GreenThumbVg.Migrations
                     b.HasIndex("PlantId");
 
                     b.ToTable("GardenPlants");
-
-                    b.HasData(
-                        new
-                        {
-                            GardenId = 1,
-                            PlantId = 1
-                        },
-                        new
-                        {
-                            GardenId = 2,
-                            PlantId = 2
-                        });
                 });
 
             modelBuilder.Entity("GreenThumbVg.Models.InstructionModel", b =>

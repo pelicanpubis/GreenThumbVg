@@ -1,5 +1,6 @@
 ﻿using GreenThumbVg.Database;
 using GreenThumbVg.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace GreenThumbVg
     /// </summary>
     public partial class PlantDetailsWindow : Window
     {
+
         public PlantDetailsWindow(PlantModel plantDetails)
         {
             InitializeComponent();
@@ -38,15 +40,45 @@ namespace GreenThumbVg
                 txtInstructions.Text = instructionsText;
             }
 
+       
+
+
         }
+
+
 
         private void btnAddToGarden_Click(object sender, RoutedEventArgs e)
         {
-            // Öppna MygardenWindowPlant-orderfönstret här
+
+
+
+
+
+
+
+
             MyGardenWindow myGardenWindow = new MyGardenWindow();
             myGardenWindow.Show();
 
+            // För att stänga det aktuella AddPlantWindow-fönstret när du visar PlantWindow
             this.Close();
+
+
         }
+
+
+        public void AddPlantAndInstructionsToGarden(PlantModel plant)
+        {
+            using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
+            {
+                // Lägg till växten i listan i MyGardenWindow
+                // t.ex. listViewPlants.Items.Add(plant);
+
+                // Spara växten i databasen
+                context.Plants.Add(plant);
+                context.SaveChanges();
+            }
+        }
+
     }
 }

@@ -13,5 +13,7 @@ namespace GreenThumbVg.Models
 
         public int PlantId { get; set; }
         public PlantModel Plant { get; set; }
+
+     
     }
 }

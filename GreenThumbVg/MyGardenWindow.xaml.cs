@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GreenThumbVg.Database;
+using GreenThumbVg.Migrations;
+using GreenThumbVg.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace GreenThumbVg
 {
@@ -19,9 +23,19 @@ namespace GreenThumbVg
     /// </summary>
     public partial class MyGardenWindow : Window
     {
+
+
+
         public MyGardenWindow()
         {
             InitializeComponent();
+
+
         }
+
+        
+
+       
     }
+
 }
