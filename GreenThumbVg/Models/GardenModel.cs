@@ -15,6 +15,15 @@ namespace GreenThumbVg.Models
 
         public List<GardenPlant> GardenPlants { get; set; } = new();
 
+        public GardenModel()
+        {
+            
+        }
 
+        public GardenModel(int gardenId, List<GardenPlant> gardenPlants)
+        {
+            GardenId = gardenId;
+            GardenPlants = gardenPlants;
+        }
     }
 }
