@@ -31,9 +31,30 @@ namespace GreenThumbVg
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            PlantWindow plantWindow = new();
-            plantWindow.Show();
-            Close();
+
+            // Läs innehållet i username och password-textrutorna
+
+            string username = txtUsername.Text;
+            string password = txtPassword.Password;
+
+            // Använd UserManager för att testa logga in
+
+            bool isSuccessfulSignIn = UserManager.SignInUser(username, password);
+
+            if (isSuccessfulSignIn) // Lyckas inloggningen... Öppna AccountWindow!
+            {
+                PlantWindow plantWindow = new();
+                plantWindow.Show();
+                Close();
+            }
+            else // Misslyckas inloggningen... Visa varningsmeddelande!
+            {
+                MessageBox.Show("Invalid username or password!", "Warning");
+            }
+
+            //PlantWindow plantWindow = new();
+            //plantWindow.Show();
+            //Close();
 
         }
     }
