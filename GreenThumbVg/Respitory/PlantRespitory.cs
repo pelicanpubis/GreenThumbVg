@@ -27,6 +27,20 @@ namespace GreenThumbVg.Respitory
 
         }
 
+        public async Task<List<PlantModel>> GetAllGardenPlants(int userId)
+        {
+            // Assuming you have access to your database context
+            using (var dbContext = new GreenThumbVgDbContext()) // Replace with your actual DbContext instantiation logic
+            {
+                var userGardenPlants = await dbContext.GardenPlants
+                    .Where(gp => gp.Garden.UserId == userId) // Filter by the user's ID
+                    .Select(gp => gp.Plant)
+                    .ToListAsync();
+
+                return userGardenPlants;
+            }
+        }
+
         // Hämtar en entitet av typen T baserat på det givna ID:t
         public async Task<T?> GetById(int id)
         {
@@ -63,8 +77,16 @@ namespace GreenThumbVg.Respitory
             }
         }
 
-       
 
+        public async Task<List<PlantModel>> GetAllGardensPlants(int userId)
+        {
+            var userGardenPlants = await _context.GardenPlants
+                .Where(gp => gp.Garden.UserId == userId)
+                .Select(gp => gp.Plant)
+                .ToListAsync();
+
+            return userGardenPlants;
+        }
 
     }
 

@@ -52,7 +52,20 @@
   Padding="0"
   VerticalAlignment="Center"/>
 
+        <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Logged in User:" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Width="141"/>
 
+
+
+        <TextBlock
+            x:Name = "txtLoggedInUser"
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+             Width="200" 
+            Height="20"
+            Background="LightSalmon" Margin="37,19,0,0"/>
 
         <TextBox 
     Name="txtPlantSearch"
@@ -77,14 +90,35 @@
 
         <Button 
     Name="btnMyGarden"
-    Grid.Column="4"
+    Grid.Column="3"
     Grid.Row="8"
-    Content="Delete"
+    Content="MyGarden"
     FontSize="12"
     Background="Pink"
     Margin="10" Click="btnMyGarden_Click"/>
-        
-        
+
+
+        <!--<Button 
+    Name="btnMyGarden"
+    Grid.Column="4"
+    Grid.Row="8"
+    Content="SignOut"
+    FontSize="12"
+    Background="LightSalmon"
+    Margin="10" Click="btnSignOut_Click"/>-->
+
+
+
+        <Button 
+    Name="btnSignOut"
+    Grid.Column="4"
+    Grid.Row="8"
+    Content="SignOut"
+    FontSize="12"
+    Background="Purple"
+    Margin="10" Click="btnSignOut_Click"/>
+
+
         <Button 
             Name="btnDelete"
             Grid.Column="7"

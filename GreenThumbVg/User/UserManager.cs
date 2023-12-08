@@ -6,30 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenThumbVg.Models;
+using GreenThumbVg.Database;
+using System.Numerics;
+using UserNamespace;
 
 namespace GreenThumbVg.User
 {
     public static class UserManager
     {
 
-        // Lista som lagrar användare
-        public static List<IUser> Users { get; private set; } = new List<IUser>
-{
-        // Startanvändare med fördefinierade växter
-        new User("user", "password")
-        {
-        Plants = new List<PlantModel> // Assuming Plants is a property in User class
-        {
-            new PlantModel("Rose") // Creating PlantModel with a name
-        }
-    },
-};
 
 
 
         // Referens till inloggad användare
-        public static IUser? SignedInUser { get; private set; }
-
+        public static User? SignedInUser { get; private set; }
 
 
 
@@ -38,29 +28,73 @@ namespace GreenThumbVg.User
         public static User? RegisterUser(string username, string password)
         {
 
-            // Kontrollera om användarnamnet är unikt
-            if (ValidateUsername(username))
-            {
-                //om det är valid så skapas en ny user objekt och initialiserar dens properties
-                User newUser = new User(username, password)
-                {
-                    Plants = new List<PlantModel>()
-                };
-                //lägger till den nya user i users listan
-                Users.Add(newUser);
 
-                return newUser;
+
+
+            using (var context = new GreenThumbVgDbContext())
+            {
+                if (ValidateUsername(username))
+                {
+                    User newUser = new User(username, password); // Create a new user with username and password
+
+                    // Add the new user to the Users list
+                    context.Users.Add(newUser);
+                    context.SaveChanges(); // Save changes to generate the UserId
+
+                    // At this point, newUser.Id will contain the auto-generated Id
+
+                    GardenModel newGarden = new GardenModel
+                    {
+                        UserId = newUser.Id // Associate the garden with the newly created user
+                    };
+
+                    context.Gardens.Add(newGarden);
+                    context.SaveChanges();
+
+                    return newUser;
+                }
+
+                return null;
+
+                //orginal
+                //using (var context = new GreenThumbVgDbContext())
+                //{
+                //    if (ValidateUsername(username))
+                //    {
+                //        User newUser = new User();
+
+                //        // Add the new user to the Users list
+                //        context.Users.Add(newUser);
+                //        context.SaveChanges(); // Save changes to generate the UserId
+
+                //        // At this point, newUser.Id will contain the auto-generated Id
+
+                //        GardenModel newGarden = new GardenModel()
+                //        {
+                //            UserId = newUser.Id,
+                //            //GardenId = newUser.
+
+                //            //GardenId = newUser.Garden.GardenId
+
+                //        };
+
+                //        context.Gardens.Add(newGarden);
+                //        context.SaveChanges();
+
+                //        return newUser;
+                //    }
+
+                //    return null;
             }
 
-            return null;
 
-        }
+    }
 
 
 
 
         //lägger till user i user listan,
-        public static bool AddUser(IUser user)
+        public static bool AddUser(User user)
         {
             //lägg till logik
 
@@ -68,7 +102,7 @@ namespace GreenThumbVg.User
         }
 
         //metod som ska ta bort från user from listan.
-        public static void RemoveUser(IUser user)
+        public static void RemoveUser(User user)
         {
             //{
             //    Users.Remove(user);
@@ -79,7 +113,7 @@ namespace GreenThumbVg.User
 
 
         //uppdatera användernamn om det nya användarnamnet är true?
-        public static bool UpdateUsername(IUser user, string newUsername)
+        public static bool UpdateUsername(User user, string newUsername)
         {
             //logik
             return true;
@@ -90,37 +124,42 @@ namespace GreenThumbVg.User
         public static bool ValidateUsername(string username)
         {
 
-            //loopar genom users listan för att se om användarnamnet är taget
-            foreach (var user in Users)
+            using (var context = new GreenThumbVgDbContext())
             {
-                if (user.Username == username)
-                {
+                // Check if any user in the database has the provided username
+                bool usernameExists = context.Users.Any(u => u.Username == username);
 
-                    //om namnet är redan taget så kommer valid namn är retunera false
-                    return false;
-                }
+                // If the username exists, return false; otherwise, return true
+                return !usernameExists;
+
+             
+
             }
-            //annars sant
-            return true;
+
+     
         }
 
 
         //metod som loggar in användaren
         public static bool SignInUser(string username, string password)
         {
-            foreach (var user in Users)
+
+            using (var context = new GreenThumbVgDbContext()) // Replace with your actual DbContext class
             {
-                if (user.Username == username && user.Password == password)
+                // Check if there's a user with the provided username and password in the database
+                var user = context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+                if (user != null)
                 {
-                    // User found!
-
+                    // User found in the database
                     SignedInUser = user;
-
                     return true;
                 }
+
+                return false;
             }
 
-            return false;
+   
         }
 
         public static void SignOutUser() //kallas på sign out knappen
@@ -128,33 +167,18 @@ namespace GreenThumbVg.User
             SignedInUser = null;
         }
 
-        public static List<PlantModel> GetAllUsersPlants()
-        {
-            // Skapar en lista för att samla alla users resor
-            List<PlantModel> allTravels = new List<PlantModel>();
 
 
-            // Loopa igenom varje användare i Users listan
-            foreach (var user in Users)
-            {
+        
 
-                if (user is User userAsUser)
-                {
-                    {
-                        // Lägg till alla resor från användaren i listan allTravels
-                        allTravels.AddRange(userAsUser.Plants);
-                    }
-                }
-            }
 
-            return allTravels;
-        }
 
+    }
 
     }
 
 
 
-}
+
 
 

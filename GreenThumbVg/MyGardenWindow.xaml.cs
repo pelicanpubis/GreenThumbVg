@@ -1,5 +1,4 @@
 ﻿using GreenThumbVg.Database;
-using GreenThumbVg.Migrations;
 using GreenThumbVg.Models;
 using GreenThumbVg.User;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
+
 namespace GreenThumbVg
 {
     /// <summary>
@@ -27,14 +27,91 @@ namespace GreenThumbVg
     {
 
 
-
         public MyGardenWindow()
         {
             InitializeComponent();
 
-            LoadAllPlantsInGarden();
+          
+            LoadCurrentUserPlants();
+          // LoadAllPlantsInGarden();
 
         }
+
+
+
+       
+        
+
+        private void LoadCurrentUserPlants()
+        {
+
+
+            // Get the signed-in user
+            GreenThumbVg.User.User currentUser = UserManager.SignedInUser;
+
+            if (currentUser != null)
+            {
+                using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
+                {
+                    var gardenPlantList = context.GardenPlants
+                        .Include(g => g.Garden)
+                        .Include(g => g.Plant)
+                        .Where(gp => gp.Garden.UserId == currentUser.Id)
+                        .ToList();
+
+                    // Add the plant names to the ListView
+                    foreach (var gardenPlant in gardenPlantList)
+                    {
+                        ListViewItem gardenPlantItem = new ListViewItem();
+                        gardenPlantItem.Tag = gardenPlant;
+                        gardenPlantItem.Content = gardenPlant.Plant.NameOfPlant;
+                        lstMyGardenPlants.Items.Add(gardenPlantItem);
+                    }
+                }
+            }
+
+
+
+            //orginal
+            //// Get the signed-in user
+            //GreenThumbVg.User.User currentUser = UserManager.SignedInUser;
+
+            //List<GardenPlant> userGardenPlants;
+
+            //if (currentUser != null)
+            //{
+            //    // Clear the existing items in the ListView
+            //    lstMyGardenPlants.Items.Clear();
+            //    using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
+            //    {
+            //        //// Retrieve garden plants for the current user
+            //        //userGardenPlants = context.GardenPlants
+            //        //    .Include(gp => gp.Plant)
+            //        //    .Where(gp => gp.Garden.UserId == currentUser.Id)
+            //        //    .ToList();
+
+            //        var gardenPlantList = context.GardenPlants.Include(g => g.Garden).Include(g => g.Plant).Where(gp => gp.Garden.UserId ==UserManager.SignedInUser.Id).ToList();
+
+            //        // Add the plant names to the ListView
+            //        foreach (var gardenPlant in gardenPlantList)
+            //        {
+            //            ListViewItem gardenPlantItem = new ListViewItem();
+            //            gardenPlantItem.Tag = gardenPlant;
+            //            gardenPlantItem.Content = gardenPlant.Plant.NameOfPlant;
+            //            lstMyGardenPlants.Items.Add(gardenPlantItem);
+
+
+            //            //// Access the associated PlantModel to display its name
+            //            //lstMyGardenPlants.Items.Add(gardenPlant.Plant.NameOfPlant);
+            //        }
+            //    }
+
+
+
+
+            //}
+        }
+
 
 
 
@@ -58,50 +135,28 @@ namespace GreenThumbVg
             }
 
 
-            //List<GardenPlant> gardenPlants;
 
-            //using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
-            //{
-            //    // Retrieve all plants considered part of the garden
-            //    gardenPlants = context.GardenPlants.ToList(); // Adjust query as per your database structure
-            //}
-
-            //// Add the plant names to the ListView
-            //foreach (var plant in gardenPlants)
-            //{
-            //    lstMyGardenPlants.Items.Add(plant.NameOfPlant);
-            //}
         }
 
         public void AddPlantToList(PlantModel plant)
         {
+
+           
             lstMyGardenPlants.Items.Add(plant.NameOfPlant);
         }
 
-        //public void AddPlantToList(PlantModel plant)
-        //{
-        //    string plantName = plant.NameOfPlant;
-        //    lstMyGardenPlants.Items.Add(plantName);
-        //}
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            // Öppna AddPlant-orderfönstret här
+            PlantWindow plantWindow = new PlantWindow();
+            plantWindow.Show();
+
+            this.Close();
+        }
+
+            }
+        }
+    
 
 
-        //public void AddPlantToList(GardenPlant gardenPlant)
-        //{
-        //    // Extract the name of the plant from the GardenPlant object
-        //    string plantName = gardenPlant.Plant.NameOfPlant;
-           
-
-        //    // Add the plant name to the ListView
-        //    lstMyGardenPlants.Items.Add(plantName);
-        //}
-
-        //public void AddPlantToList(GardenPlant plant)
-        //{
-        //    lstMyGardenPlants.Items.Add(plant); // Lägg till växten i listan (listview)
-        //}
-
-    }
-
-
-}
 

@@ -1,5 +1,4 @@
 ﻿using GreenThumbVg.Database;
-using GreenThumbVg.Migrations;
 using GreenThumbVg.Models;
 using Microsoft.EntityFrameworkCore;
 using System;

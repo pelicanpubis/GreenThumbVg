@@ -1,4 +1,6 @@
-﻿using GreenThumbVg.User;
+﻿using GreenThumbVg.Database;
+using GreenThumbVg.Models;
+using GreenThumbVg.User;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -31,61 +33,152 @@ namespace GreenThumbVg
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+            using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
             {
-
-                // TODO: Refactor these to clear UI method
-                warnUsername.Visibility = Visibility.Hidden;
-                warnPassword.Visibility = Visibility.Hidden;
-
-                // Läsa våra inputs
-                string username = txtUsername.Text.Trim();
-                string password = txtPassword.Password.Trim();
-
-
-                //kollar med validateuser metoden om username är taget
-                if (!UserManager.ValidateUsername(username))
+                try
                 {
-                    // Visar varningsrute om användar namn inte är taget
-                    MessageBox.Show("Username is already taken. Please choose a different username.");
-                    return;
-                }
+                    warnUsername.Visibility = Visibility.Hidden;
+                    warnPassword.Visibility = Visibility.Hidden;
 
-                // Checka alla inputs
-                if (username == "")
-                {
-                    warnUsername.Visibility = Visibility.Visible;
-                    return;
-                }
+                    string username = txtUsername.Text.Trim();
+                    string password = txtPassword.Password.Trim();
 
-                if (password == "")
-                {
-                    warnPassword.Visibility = Visibility.Visible;
-                    return;
-                }
+                    if (!UserManager.ValidateUsername(username))
+                    {
+                        MessageBox.Show("Username is already taken. Please choose a different username.");
+                        return;
+                    }
 
-                if (username != "" && password != "" )
-                {
-                   
+                    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                    {
+                        if (string.IsNullOrEmpty(username))
+                            warnUsername.Visibility = Visibility.Visible;
+                        if (string.IsNullOrEmpty(password))
+                            warnPassword.Visibility = Visibility.Visible;
+                        return;
+                    }
+
                     GreenThumbVg.User.User newUser = UserManager.RegisterUser(username, password);
 
-
-                    MainWindow mainWindow = new();
-                    mainWindow.Show();
-                    Close();
-
+                    if (newUser != null)
+                    {
+                        MainWindow mainWindow = new();
+                        mainWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to register the user. Please try again.");
+                    }
+                }
+                catch (InvalidCastException ex)
+                {
+                    MessageBox.Show("Please select a country");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
                 }
             }
-            catch (InvalidCastException ex)
-            {
-                MessageBox.Show("Please select a country");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong");
-            }
+
+
+            ////orginal
+            //using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
+            //{
+
+
+            //    try
+            //    {
+
+            //        // TODO: Refactor these to clear UI method
+            //        warnUsername.Visibility = Visibility.Hidden;
+            //        warnPassword.Visibility = Visibility.Hidden;
+
+            //        // Läsa våra inputs
+            //        string username = txtUsername.Text.Trim();
+            //        string password = txtPassword.Password.Trim();
+
+
+            //        //kollar med validateuser metoden om username är taget
+            //        if (!UserManager.ValidateUsername(username))
+            //        {
+            //            // Visar varningsrute om användar namn inte är taget
+            //            MessageBox.Show("Username is already taken. Please choose a different username.");
+            //            return;
+            //        }
+
+            //        // Checka alla inputs
+            //        if (username == "")
+            //        {
+            //            warnUsername.Visibility = Visibility.Visible;
+            //            return;
+            //        }
+
+            //        if (password == "")
+            //        {
+            //            warnPassword.Visibility = Visibility.Visible;
+            //            return;
+            //        }
+
+            //        if (username != "" && password != "")
+
+
+            //        {
+
+
+            //            GreenThumbVg.User.User newUser = UserManager.RegisterUser(username, password);
+
+            //            GardenModel newGarden = new GardenModel()
+            //            {
+            //                //UserId = newUser.Id,
+            //                //GardenId = newUser.Id,
+            //            };
+
+            //            context.Gardens.Add(newGarden); // Add the newGarden object to the context
+            //            context.SaveChanges();
+
+
+            //            if (newUser != null)
+            //            {
+            //                MainWindow mainWindow = new();
+            //                mainWindow.Show();
+            //                Close();
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Failed to register the user. Please try again.");
+            //            }
+            //        }
+            //    }
+
+
+
+
+            //    catch (InvalidCastException ex)
+            //    {
+            //        MessageBox.Show("Please select a country");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show($"An error occurred: {ex.Message}"); // Display the specific exception message
+            //    }
+
+
+
 
         }
+        }
+
+
     }
-    }
+
+
+
+
+        
+
+    
+
+
 

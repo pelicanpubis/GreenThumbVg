@@ -29,18 +29,21 @@ namespace GreenThumbVg.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GardenId"));
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("GardenId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Gardens");
 
                     b.HasData(
                         new
                         {
-                            GardenId = 1
-                        },
-                        new
-                        {
-                            GardenId = 2
+                            GardenId = 1,
+                            UserId = 1
                         });
                 });
 
@@ -63,11 +66,6 @@ namespace GreenThumbVg.Migrations
                         {
                             GardenId = 1,
                             PlantId = 1
-                        },
-                        new
-                        {
-                            GardenId = 2,
-                            PlantId = 2
                         });
                 });
 
@@ -136,12 +134,9 @@ namespace GreenThumbVg.Migrations
 
                     b.Property<string>("NameOfPlant")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PlantId");
-
-                    b.HasIndex("NameOfPlant")
-                        .IsUnique();
 
                     b.ToTable("Plants");
 
@@ -161,6 +156,47 @@ namespace GreenThumbVg.Migrations
                             PlantId = 3,
                             NameOfPlant = "Tulips"
                         });
+                });
+
+            modelBuilder.Entity("GreenThumbVg.User.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "lösenord",
+                            Username = "användarnamn"
+                        });
+                });
+
+            modelBuilder.Entity("GreenThumbVg.Models.GardenModel", b =>
+                {
+                    b.HasOne("GreenThumbVg.User.User", "User")
+                        .WithOne("Garden")
+                        .HasForeignKey("GreenThumbVg.Models.GardenModel", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GreenThumbVg.Models.GardenPlant", b =>
@@ -203,6 +239,12 @@ namespace GreenThumbVg.Migrations
                     b.Navigation("GardenPlants");
 
                     b.Navigation("Instructions");
+                });
+
+            modelBuilder.Entity("GreenThumbVg.User.User", b =>
+                {
+                    b.Navigation("Garden")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

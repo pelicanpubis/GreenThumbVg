@@ -1,8 +1,10 @@
 ﻿using GreenThumbVg.Database;
 using GreenThumbVg.Models;
 using GreenThumbVg.Respitory;
+using GreenThumbVg.User;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 
 namespace GreenThumbVg
 {
@@ -31,6 +34,14 @@ namespace GreenThumbVg
         public PlantWindow()
         {
             InitializeComponent();
+
+
+
+            if (UserManager.SignedInUser != null)
+            {
+                txtLoggedInUser.Text = UserManager.SignedInUser.Username;
+            }
+
 
             // Laddar växterna asynkront när fönstret skapas
             LoadPlantsAsync();
@@ -144,10 +155,28 @@ namespace GreenThumbVg
 
         private void btnMyGarden_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming you have some identifier for the user to filter the garden plants, e.g., user ID
+            // Pass the signed-in user to MyGardenWindow
+            //MyGardenWindow myGardenWindow = new MyGardenWindow(UserManager.SignedInUser);
+            //myGardenWindow.Show();
+
+            //this.Close();
+
+            //Öppnar MyGardenWindow
+            MyGardenWindow myGardenWindow = new MyGardenWindow();
+            myGardenWindow.Show();
+
+            this.Close();
 
 
+        }
 
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new();
+            mainWindow.Show();
+            UserManager.SignOutUser();
+            Close();
         }
     }
 }

@@ -34,7 +34,7 @@
                 HorizontalAlignment="Left"
                 Width="100"
                 Height="30"
-                Margin="20,310,0,0" 
+                Margin="20,310,0,0" Click="btnBack_Click" 
                   />
 
 
