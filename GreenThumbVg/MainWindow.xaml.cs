@@ -52,9 +52,6 @@ namespace GreenThumbVg
                 MessageBox.Show("Invalid username or password!", "Warning");
             }
 
-            //PlantWindow plantWindow = new();
-            //plantWindow.Show();
-            //Close();
 
         }
     }

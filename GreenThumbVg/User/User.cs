@@ -23,7 +23,8 @@ namespace GreenThumbVg.User
         public string Password { get; set; } = null!;
 
 
-        public GardenModel Garden { get; set; } // Navigation property
+        public GardenModel Garden { get; set; } // Navigation property till trädgården för användaren
+
 
 
         public User()
@@ -35,33 +36,10 @@ namespace GreenThumbVg.User
         {
             Username = username;
             Password = password;
-            Garden = new GardenModel(); // Create a new garden for each user
+            Garden = new GardenModel();
 
         }
 
-        // Method to get garden plants for a specific user
-
-
-        //första
-        //public string Username { get; set; } // required?
-        //public string Password { get; set; }
-        //public List<PlantModel> Plants { get; set; }
-
-        ////Konstruktor
-        ////när en instans av USER skapas så skapas en tom travelslista
-
-        //public User(string username, string password, List<PlantModel> plants) //behövs denna?
-        //{
-
-        //    Username = username;
-        //    Password = password;
-        //    Plants = plants; // Initialize Plants as a new list
-
-        //}
-
-        //public void AddPlant(PlantModel plant)
-        //{
-        //    Plants.Add(plant); // Method to add plants to the user
-        //}
+       
     }
 }

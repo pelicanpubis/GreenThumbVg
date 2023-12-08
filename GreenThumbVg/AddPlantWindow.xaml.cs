@@ -37,7 +37,7 @@ namespace GreenThumbVg
 
         private void btnAddInstruction_Click(object sender, RoutedEventArgs e)
         {
-            // Kontrollerar om alla nödvändiga fält är ifyllda innan instruktionen läggs till
+            // Kollar om något av fälten är tomma innan instruktionen läggs till
             if (string.IsNullOrWhiteSpace(txtNameOfPlant.Text) || string.IsNullOrWhiteSpace(txtInstruction.Text) || string.IsNullOrWhiteSpace(txtInstructionName.Text))
             {
                 txtValidationMessage.Text = "Alla fält måste matas in.";

@@ -36,6 +36,7 @@ namespace GreenThumbVg
             InitializeComponent();
 
 
+            // Visa inloggad användares namn om någon är inloggad
 
             if (UserManager.SignedInUser != null)
             {
@@ -120,10 +121,7 @@ namespace GreenThumbVg
                         PlantRepository<PlantModel> plantRepository = new(context);
                         plantRepository.Delete(selectedPlant);
 
-                        // Ta bort tillhörande skötselråd från databasen
-                        // Du måste anpassa detta beroende på hur din databas är strukturerad
-                        // Till exempel, om det finns en separat tabell för skötselråd relaterade till växter
-                        // kan du använda plantRepository.DeleteCareInstructions(selectedPlant);
+                      
                     }
 
                     MessageBox.Show($"{selectedPlant.NameOfPlant} has been deleted.");
@@ -155,11 +153,7 @@ namespace GreenThumbVg
 
         private void btnMyGarden_Click(object sender, RoutedEventArgs e)
         {
-            // Pass the signed-in user to MyGardenWindow
-            //MyGardenWindow myGardenWindow = new MyGardenWindow(UserManager.SignedInUser);
-            //myGardenWindow.Show();
-
-            //this.Close();
+         
 
             //Öppnar MyGardenWindow
             MyGardenWindow myGardenWindow = new MyGardenWindow();

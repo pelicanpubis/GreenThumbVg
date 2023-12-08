@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbVg.Database
 {
-    public class GreenThumbVgDbContext : DbContext
+    public class GreenThumbVgDbContext : DbContext // Skapar en DbContext-klass för databasåtkomst
     {
 
 
@@ -41,19 +41,20 @@ namespace GreenThumbVg.Database
 
             base.OnModelCreating(modelBuilder);
 
+            // Definierar nycklar och relationer mellan Garden och Plant i GardenPlant-tabellen
             modelBuilder.Entity<GardenPlant>()
                 .HasKey(gp => new { gp.GardenId, gp.PlantId });
 
 
-        //    modelBuilder.Entity<GardenPlant>()
-        //.HasOne(gp => gp.Garden)
-        //.WithMany(g => g.GardenPlants)
-        //.HasForeignKey(gp => gp.GardenId);
+            //    modelBuilder.Entity<GardenPlant>()
+            //.HasOne(gp => gp.Garden)
+            //.WithMany(g => g.GardenPlants)
+            //.HasForeignKey(gp => gp.GardenId);
 
-        //    modelBuilder.Entity<GardenPlant>()
-        //        .HasOne(gp => gp.Plant)
-        //        .WithMany(p => p.GardenPlants)
-        //        .HasForeignKey(gp => gp.PlantId);
+            //    modelBuilder.Entity<GardenPlant>()
+            //        .HasOne(gp => gp.Plant)
+            //        .WithMany(p => p.GardenPlants)
+            //        .HasForeignKey(gp => gp.PlantId);
 
 
             //modelBuilder.Entity<GardenPlant>()
@@ -80,12 +81,15 @@ namespace GreenThumbVg.Database
             //    .HasIndex(p => p.NameOfPlant)
             //    .IsUnique();
 
+
+            // Seedar databasen med  data för PlantModel och InstructionModel
             modelBuilder.Entity<PlantModel>().HasData(
                 new PlantModel("Sunflower") { PlantId = 1 },
                 new PlantModel("Roses") { PlantId = 2 },
                 new PlantModel("Tulips") { PlantId = 3 }
             );
 
+            // Fördefinierade instruktioner för växter
             modelBuilder.Entity<InstructionModel>().HasData(
                 new InstructionModel
                 {
@@ -118,6 +122,7 @@ namespace GreenThumbVg.Database
                 }
             );
 
+            // Seedar databasen med  data för GardenModel och GardenPlant
             modelBuilder.Entity<GardenModel>().HasData(
                 new GardenModel { GardenId = 1, UserId = 1 } // Associate with User 1
             );

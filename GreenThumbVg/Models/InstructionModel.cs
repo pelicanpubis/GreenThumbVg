@@ -35,7 +35,7 @@ namespace GreenThumbVg.Models
         }
 
         //kanske ha en metod som retunerar name och instruction som en string
-        public override string ToString()
+        public override string ToString() // En metod som överskriver ToString-metoden för att returnera en strängrepresentation av objektet
         {
             return $"{Plant} - {Instruction}";
         }

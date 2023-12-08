@@ -72,7 +72,7 @@ namespace GreenThumbVg.Respitory
 
             using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
             {
-                context.Plants.Add(plant); // Save the plant to the database
+                context.Plants.Add(plant); 
                 context.SaveChanges();
             }
         }

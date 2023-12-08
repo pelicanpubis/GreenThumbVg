@@ -12,79 +12,42 @@ using UserNamespace;
 
 namespace GreenThumbVg.User
 {
-    public static class UserManager
+    public static class UserManager // En statisk klass för att hantera användare
     {
 
+        // Referens till inloggad användare som är nullbar
+        public static User? SignedInUser { get; private set; } // Referens till den inloggade användaren
 
 
 
-        // Referens till inloggad användare
-        public static User? SignedInUser { get; private set; }
-
-
-
-
-        //denna metoden registrerar en ny user
-        public static User? RegisterUser(string username, string password)
+        // Metod för att registrera en ny användare
+        public static User? RegisterUser(string username, string password) // Skapar en kontext av databasen
         {
-
-
-
 
             using (var context = new GreenThumbVgDbContext())
             {
-                if (ValidateUsername(username))
+                if (ValidateUsername(username)) // Validerar användarnamnet
                 {
-                    User newUser = new User(username, password); // Create a new user with username and password
+                    User newUser = new User(username, password);  // Skapar en ny användare med användarnamn och lösenord
+                   
+                    
+                    context.Users.Add(newUser); // Lägger till den nya användaren i databasen
+                    context.SaveChanges(); // Spara ändringar för att generera UserId
 
-                    // Add the new user to the Users list
-                    context.Users.Add(newUser);
-                    context.SaveChanges(); // Save changes to generate the UserId
-
-                    // At this point, newUser.Id will contain the auto-generated Id
 
                     GardenModel newGarden = new GardenModel
                     {
-                        UserId = newUser.Id // Associate the garden with the newly created user
+                        UserId = newUser.Id  // Kopplar trädgården till den nyss skapade användaren
                     };
 
-                    context.Gardens.Add(newGarden);
-                    context.SaveChanges();
+                    context.Gardens.Add(newGarden); // Lägger till trädgården i databasen
+                    context.SaveChanges(); // Spara ändringar
 
-                    return newUser;
+                    return newUser;  // Returnerar den nya användaren
                 }
 
-                return null;
+                return null;  // Returnerar null om användarnamnet redan finns
 
-                //orginal
-                //using (var context = new GreenThumbVgDbContext())
-                //{
-                //    if (ValidateUsername(username))
-                //    {
-                //        User newUser = new User();
-
-                //        // Add the new user to the Users list
-                //        context.Users.Add(newUser);
-                //        context.SaveChanges(); // Save changes to generate the UserId
-
-                //        // At this point, newUser.Id will contain the auto-generated Id
-
-                //        GardenModel newGarden = new GardenModel()
-                //        {
-                //            UserId = newUser.Id,
-                //            //GardenId = newUser.
-
-                //            //GardenId = newUser.Garden.GardenId
-
-                //        };
-
-                //        context.Gardens.Add(newGarden);
-                //        context.SaveChanges();
-
-                //        return newUser;
-                //    }
-
-                //    return null;
             }
 
 
@@ -120,16 +83,16 @@ namespace GreenThumbVg.User
         }
 
 
-        //Metod: Kollar om användar namn inte är taget
+        // Metod för att validera användarnamn (kollar om det inte redan existerar)
         public static bool ValidateUsername(string username)
         {
 
             using (var context = new GreenThumbVgDbContext())
             {
-                // Check if any user in the database has the provided username
+                // Kollar om någon användare i databasen har det angivna användarnamnet
                 bool usernameExists = context.Users.Any(u => u.Username == username);
 
-                // If the username exists, return false; otherwise, return true
+                // Om användarnamnet redan existerar returneras false, annars returneras true
                 return !usernameExists;
 
              
@@ -140,20 +103,20 @@ namespace GreenThumbVg.User
         }
 
 
-        //metod som loggar in användaren
+        // Metod för att logga in en användare
         public static bool SignInUser(string username, string password)
         {
 
             using (var context = new GreenThumbVgDbContext()) // Replace with your actual DbContext class
             {
-                // Check if there's a user with the provided username and password in the database
+                // Kollar om det finns en användare med det angivna användarnamnet och lösenordet i databasen
                 var user = context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
 
-                if (user != null)
+                if (user != null) // Om användaren hittas i databasen
                 {
-                    // User found in the database
-                    SignedInUser = user;
-                    return true;
+                    SignedInUser = user; // Sätter den inloggade användaren till den hittade användaren
+
+                    return true; // Returnerar true för att indikera att inloggningen var framgångsrik
                 }
 
                 return false;
@@ -162,16 +125,11 @@ namespace GreenThumbVg.User
    
         }
 
+        // Metod för att logga ut användaren (nollställer den inloggade användaren)
         public static void SignOutUser() //kallas på sign out knappen
         {
-            SignedInUser = null;
+            SignedInUser = null; // Sätter den inloggade användaren till null för att logga ut
         }
-
-
-
-        
-
-
 
     }
 

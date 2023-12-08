@@ -1,21 +1,6 @@
 ﻿using GreenThumbVg.Database;
-using GreenThumbVg.Models;
 using GreenThumbVg.User;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using User = GreenThumbVg.User;
 
 
 
@@ -41,14 +26,22 @@ namespace GreenThumbVg
                     warnUsername.Visibility = Visibility.Hidden;
                     warnPassword.Visibility = Visibility.Hidden;
 
+
+                    // Hämta användarnamn och lösenord från textfälten
                     string username = txtUsername.Text.Trim();
                     string password = txtPassword.Password.Trim();
+
+
+                    // Kontrollera om användarnamnet redan existerar
 
                     if (!UserManager.ValidateUsername(username))
                     {
                         MessageBox.Show("Username is already taken. Please choose a different username.");
                         return;
                     }
+
+
+                    // Kontrollera om fälten för användarnamn och lösenord är tomma
 
                     if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                     {
@@ -59,9 +52,13 @@ namespace GreenThumbVg
                         return;
                     }
 
+
+                    // Registrera en ny användare och hämta den skapade användaren
+
                     GreenThumbVg.User.User newUser = UserManager.RegisterUser(username, password);
 
-                    if (newUser != null)
+                    if (newUser != null)  // Om registreringen lyckades, öppna huvudfönstret och stäng registreringsfönstret
+
                     {
                         MainWindow mainWindow = new();
                         mainWindow.Show();
@@ -83,102 +80,18 @@ namespace GreenThumbVg
             }
 
 
-            ////orginal
-            //using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
-            //{
-
-
-            //    try
-            //    {
-
-            //        // TODO: Refactor these to clear UI method
-            //        warnUsername.Visibility = Visibility.Hidden;
-            //        warnPassword.Visibility = Visibility.Hidden;
-
-            //        // Läsa våra inputs
-            //        string username = txtUsername.Text.Trim();
-            //        string password = txtPassword.Password.Trim();
-
-
-            //        //kollar med validateuser metoden om username är taget
-            //        if (!UserManager.ValidateUsername(username))
-            //        {
-            //            // Visar varningsrute om användar namn inte är taget
-            //            MessageBox.Show("Username is already taken. Please choose a different username.");
-            //            return;
-            //        }
-
-            //        // Checka alla inputs
-            //        if (username == "")
-            //        {
-            //            warnUsername.Visibility = Visibility.Visible;
-            //            return;
-            //        }
-
-            //        if (password == "")
-            //        {
-            //            warnPassword.Visibility = Visibility.Visible;
-            //            return;
-            //        }
-
-            //        if (username != "" && password != "")
-
-
-            //        {
-
-
-            //            GreenThumbVg.User.User newUser = UserManager.RegisterUser(username, password);
-
-            //            GardenModel newGarden = new GardenModel()
-            //            {
-            //                //UserId = newUser.Id,
-            //                //GardenId = newUser.Id,
-            //            };
-
-            //            context.Gardens.Add(newGarden); // Add the newGarden object to the context
-            //            context.SaveChanges();
-
-
-            //            if (newUser != null)
-            //            {
-            //                MainWindow mainWindow = new();
-            //                mainWindow.Show();
-            //                Close();
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Failed to register the user. Please try again.");
-            //            }
-            //        }
-            //    }
-
-
-
-
-            //    catch (InvalidCastException ex)
-            //    {
-            //        MessageBox.Show("Please select a country");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show($"An error occurred: {ex.Message}"); // Display the specific exception message
-            //    }
-
-
-
-
         }
-        }
-
-
     }
 
 
+}
 
 
-        
 
-    
+
+
+
+
 
 
 

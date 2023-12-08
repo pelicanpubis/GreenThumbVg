@@ -3,6 +3,7 @@ using GreenThumbVg.Models;
 using GreenThumbVg.Respitory;
 using GreenThumbVg.User;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,9 @@ namespace GreenThumbVg
     /// </summary>
     public partial class PlantDetailsWindow : Window
     {
-        private PlantModel selectedPlant;
-       
+        
+        private PlantModel selectedPlant; //En privat variabel för att hålla information om den valda växten
+
 
 
 
@@ -35,8 +37,9 @@ namespace GreenThumbVg
         public PlantDetailsWindow(PlantModel plantDetails)
         {
             InitializeComponent();
-            txtName.Text = plantDetails.NameOfPlant;
-            selectedPlant = plantDetails;
+            txtName.Text = plantDetails.NameOfPlant; // Visar växtnamnet i fönstret
+            selectedPlant = plantDetails;  // Sätter den valda växten
+
 
 
             // Hämtar instruktioner för den specifika växten från databasen och visar dem i fönstret
@@ -57,41 +60,43 @@ namespace GreenThumbVg
         }
 
 
+        // Metod för att lägga till växter i användarens trädgård
         private void btnAddToGarden_Click(object sender, RoutedEventArgs e)
         {
-            GreenThumbVg.User.User currentUser = UserManager.SignedInUser;
+            GreenThumbVg.User.User currentUser = UserManager.SignedInUser; // Hämtar den inloggade användaren
 
-            if (currentUser != null)
+            if (currentUser != null) // Kontrollerar om användaren är inloggad
             {
                 using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
                 {
+                    // Hämtar den valda växtens ID
                     int plantId = selectedPlant.PlantId;
 
-                    // Retrieve the user's garden ID
+                    // Hämtar användarens trädgårds-ID
                     int userGardenId = context.Gardens
                         .Where(g => g.UserId == currentUser.Id)
                         .Select(g => g.GardenId)
                         .FirstOrDefault();
 
-                    if (userGardenId != 0) // Ensure a valid garden ID is retrieved
+                    if (userGardenId != 0) // Kontrollerar om giltigt trädgårds-ID hämtades
                     {
-                        // Check if the plant already exists in the current user's garden
+                        // Kontrollerar om växten redan finns i användarens trädgård
                         bool plantExistsInGarden = context.GardenPlants
                             .Any(gp => gp.GardenId == userGardenId && gp.PlantId == plantId);
 
-                        if (!plantExistsInGarden)
+                        if (!plantExistsInGarden) // Lägger till växten om den inte redan finns
                         {
                             GardenPlant gardenPlant = new GardenPlant
                             {
-                                GardenId = userGardenId, // Use the retrieved garden ID
+                                GardenId = userGardenId, // Använder det hämtade trädgårds-ID:t
                                 PlantId = plantId
                             };
 
-                            context.GardenPlants.Add(gardenPlant);
-                            context.SaveChanges();
+                            context.GardenPlants.Add(gardenPlant); // Använder det hämtade trädgårds-ID:t
+                            context.SaveChanges();// Lägger till växten i trädgårdslistan
 
                             MyGardenWindow myGardenWindow = new MyGardenWindow();
-                            myGardenWindow.AddPlantToList(selectedPlant);
+                           // myGardenWindow.AddPlantToList(selectedPlant);
                             myGardenWindow.Show();
 
                             this.Close();
@@ -113,53 +118,6 @@ namespace GreenThumbVg
             }
 
 
-            //orginal
-            //// Get the signed-in user
-            //GreenThumbVg.User.User currentUser = UserManager.SignedInUser;
-
-            //if (currentUser != null)
-            //{
-            //    using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
-            //    {
-            //        int plantId = selectedPlant.PlantId;
-
-            //        // Check if the plant already exists in the current user's garden
-            //        bool plantExistsInGarden = context.GardenPlants
-            //            .Any(gp => gp.Garden.UserId == currentUser.Id && gp.PlantId == plantId);
-
-            //        if (!plantExistsInGarden)
-            //        {
-            //            GardenPlant gardenPlant = new GardenPlant
-            //            {
-
-            //                //vill hämta garden id
-            //                GardenId = currentUser.Id, // Use the current user's garden ID
-
-            //                //GardenId = currentUser.Garden.GardenId, // Use the current user's garden ID
-            //                PlantId = plantId
-            //            };
-
-            //            context.GardenPlants.Add(gardenPlant);
-            //            context.SaveChanges();
-
-            //            // Open MyGardenWindow and pass the selected plant
-            //            MyGardenWindow myGardenWindow = new MyGardenWindow();
-            //            myGardenWindow.AddPlantToList(selectedPlant);
-            //            myGardenWindow.Show();
-
-            //            this.Close();
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("This plant is already in the garden.");
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No user signed in.");
-            //}
-
 
 
         }
@@ -175,12 +133,6 @@ namespace GreenThumbVg
                     context.Plants.Add(plant);
                     context.SaveChanges();
                 }
-
-
-
-
-
-
 
             }
 
