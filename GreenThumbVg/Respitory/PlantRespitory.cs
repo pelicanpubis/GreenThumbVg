@@ -59,11 +59,17 @@ namespace GreenThumbVg.Respitory
             await _dbSet.AddAsync(entity);
         }
 
-        // Tar bort en entitet av typen T från DbSet<T> och sparar ändringar i databasen
-        public async Task Delete(T entity)
+        //// Tar bort en entitet av typen T från DbSet<T> och sparar ändringar i databasen
+        //public async Task Delete(T entity)
+        //{
+        //    _dbSet.Remove(entity);
+        //    await _context.SaveChangesAsync();
+        //}
+
+        public void Delete(T entity)
         {
-            _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+            _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
         }
 
         // Metod för att lägga till en växt och dess instruktioner till en trädgård//använder inte denna... borde tas bort

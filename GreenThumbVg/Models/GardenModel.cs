@@ -19,9 +19,6 @@ namespace GreenThumbVg.Models
 
 
 
-
-
-
         public int UserId { get; set; } // Främmande nyckel för användarrelation
 
 

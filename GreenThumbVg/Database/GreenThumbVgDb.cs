@@ -1,4 +1,10 @@
-﻿using GreenThumbVg.Models;
+﻿
+
+using EntityFrameworkCore.EncryptColumn.Extension;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using GreenThumbVg.Models;
+using GreenThumbVg.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbVg.Database
@@ -6,11 +12,15 @@ namespace GreenThumbVg.Database
     public class GreenThumbVgDbContext : DbContext // Skapar en DbContext-klass för databasåtkomst
     {
 
+        private readonly IEncryptionProvider _provider;
 
 
         // Konstruktör för att skapa en instans av kontexten
         public GreenThumbVgDbContext()
         {
+
+            _provider = new GenerateEncryptionProvider(KeyManager.GetEncryptionKey());
+
 
         }
 
@@ -36,10 +46,17 @@ namespace GreenThumbVg.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.UseEncryption(_provider);
+
+
 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.UseEncryption(_provider);
+
 
             // Definierar nycklar och relationer mellan Garden och Plant i GardenPlant-tabellen
             modelBuilder.Entity<GardenPlant>()
@@ -82,11 +99,32 @@ namespace GreenThumbVg.Database
             //    .IsUnique();
 
 
+
+
+
+
+
+
+
             // Seedar databasen med  data för PlantModel och InstructionModel
             modelBuilder.Entity<PlantModel>().HasData(
                 new PlantModel("Sunflower") { PlantId = 1 },
                 new PlantModel("Roses") { PlantId = 2 },
-                new PlantModel("Tulips") { PlantId = 3 }
+                new PlantModel("Tulips") { PlantId = 3 },
+                new PlantModel("Lavendel") { PlantId = 4 },
+                new PlantModel("Prästkrage") { PlantId = 5 },
+                new PlantModel("Pioner") { PlantId = 6 },
+                new PlantModel("Orkideer") { PlantId = 7 },
+                new PlantModel("Solsikka") { PlantId = 8 },
+                new PlantModel("Dahlia") { PlantId = 9 },
+                new PlantModel("Fuschia") { PlantId = 10 },
+                new PlantModel("Hortensia") { PlantId = 11 },
+                new PlantModel("Maskros") { PlantId = 12 }
+
+
+
+
+
             );
 
             // Fördefinierade instruktioner för växter
@@ -118,8 +156,79 @@ namespace GreenThumbVg.Database
                     InstructionId = 4,
                     NameOfInstruction = "Beskärning",
                     Instruction = "Klipp bort döda eller sjuka blad och kvistar för att främja tillväxt och hålla växterna friska. Det kan också bidra till att forma växten på ett snyggt sätt.",
-                    PlantId = 2
-                }
+                    PlantId = 4
+                },
+                   new InstructionModel
+                   {
+                       InstructionId = 5,
+                       NameOfInstruction = "Vattning",
+                       Instruction = "Vattna regelbundet och se till ordentlig dränering.",
+                       PlantId = 5
+                   },
+
+                        new InstructionModel
+                        {
+                            InstructionId = 6,
+                            NameOfInstruction = "Sol",
+                            Instruction = "Placera i väldränerad jord och delvis solsken.",
+                            PlantId = 6
+                        },
+
+                            new InstructionModel
+                            {
+                                InstructionId = 7,
+                                NameOfInstruction = "Placering och Jord",
+                                Instruction = "Plantera i soligt läge och väldränerad jord.",
+                                PlantId = 7
+                            },
+
+                                 new InstructionModel
+                               {
+                                     InstructionId = 8,
+                                     NameOfInstruction = "Placera i ljus men undvik direkt solljus.",
+                                     Instruction = "Ljus och Skugga",
+                                     PlantId = 8
+                                 },
+
+                                      new InstructionModel
+                                      {
+                                          InstructionId = 9,
+                                          NameOfInstruction = "Vattna regelbundet och undvik att övervattna.",
+                                          Instruction = "Vattning",
+                                          PlantId = 9
+                                      },
+
+
+
+
+                                      new InstructionModel
+                                      {
+                                          InstructionId = 10,
+                                          NameOfInstruction = "Placera i soligt eller delvis skuggigt läge.",
+                                          Instruction = "Ljus och skugga",
+                                          PlantId = 10
+                                      },
+
+                                           new InstructionModel
+                                           {
+                                               InstructionId = 11,
+                                               NameOfInstruction = "Kräver fuktig jord och undvik direkt solljus.",
+                                               Instruction = "Jord och placering",
+                                               PlantId = 11
+                                           },
+
+                                                      new InstructionModel
+                                                      {
+                                                          InstructionId = 12,
+                                                          NameOfInstruction = "Trivs i sur jord och behöver regelbunden vattning.",
+                                                          Instruction = "Jord och Vattning",
+                                                          PlantId = 12
+                                                      }
+
+
+
+
+
             );
 
             // Seedar databasen med  data för GardenModel och GardenPlant

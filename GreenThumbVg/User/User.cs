@@ -9,6 +9,7 @@ using GreenThumbVg.Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using EntityFrameworkCore.EncryptColumn.Attribute;
 
 namespace GreenThumbVg.User
 {
@@ -19,7 +20,9 @@ namespace GreenThumbVg.User
         public int Id { get; set; }
 
         public string Username { get; set; } = null!;
-        // [EncryptColumn]
+
+
+        [EncryptColumn]
         public string Password { get; set; } = null!;
 
 

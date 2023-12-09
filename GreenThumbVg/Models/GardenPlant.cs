@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace GreenThumbVg.Models
 { //many to many
    public class GardenPlant // En klass som representerar en koppling mellan trädgård och växt
     {
+
+        [Key]
         public int GardenId { get; set; }  // Egenskap för trädgårds-ID
         public GardenModel Garden { get; set; }  // Navigationsegenskap för trädgård
 

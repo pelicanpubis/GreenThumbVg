@@ -2,14 +2,10 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace GreenThumbVg.Migrations
 {
-    /// <inheritdoc />
     public partial class initial : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -116,7 +112,7 @@ namespace GreenThumbVg.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "id", "Password", "Username" },
-                values: new object[] { 1, "lösenord", "användarnamn" });
+                values: new object[] { 1, "q52AHJxFaoKjrpR57MFWAQ==", "användarnamn" });
 
             migrationBuilder.InsertData(
                 table: "Gardens",
@@ -156,7 +152,6 @@ namespace GreenThumbVg.Migrations
                 column: "PlantId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

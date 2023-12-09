@@ -11,18 +11,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenThumbVg.Migrations
 {
     [DbContext(typeof(GreenThumbVgDbContext))]
-    [Migration("20231208164239_initial")]
-    partial class initial
+    [Migration("20231209125902_flerblommor")]
+    partial class flerblommor
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "6.0.25")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("GreenThumbVg.Models.GardenModel", b =>
                 {
@@ -30,7 +29,7 @@ namespace GreenThumbVg.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GardenId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GardenId"), 1L, 1);
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -78,7 +77,7 @@ namespace GreenThumbVg.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructionId"), 1L, 1);
 
                     b.Property<string>("Instruction")
                         .IsRequired()
@@ -123,7 +122,63 @@ namespace GreenThumbVg.Migrations
                             InstructionId = 4,
                             Instruction = "Klipp bort döda eller sjuka blad och kvistar för att främja tillväxt och hålla växterna friska. Det kan också bidra till att forma växten på ett snyggt sätt.",
                             NameOfInstruction = "Beskärning",
-                            PlantId = 2
+                            PlantId = 4
+                        },
+                        new
+                        {
+                            InstructionId = 5,
+                            Instruction = "Vattna regelbundet och se till ordentlig dränering.",
+                            NameOfInstruction = "Vattning",
+                            PlantId = 5
+                        },
+                        new
+                        {
+                            InstructionId = 6,
+                            Instruction = "Placera i väldränerad jord och delvis solsken.",
+                            NameOfInstruction = "Sol",
+                            PlantId = 6
+                        },
+                        new
+                        {
+                            InstructionId = 7,
+                            Instruction = "Plantera i soligt läge och väldränerad jord.",
+                            NameOfInstruction = "Placering och Jord",
+                            PlantId = 7
+                        },
+                        new
+                        {
+                            InstructionId = 8,
+                            Instruction = "Ljus och Skugga",
+                            NameOfInstruction = "Placera i ljus men undvik direkt solljus.",
+                            PlantId = 8
+                        },
+                        new
+                        {
+                            InstructionId = 9,
+                            Instruction = "Vattning",
+                            NameOfInstruction = "Vattna regelbundet och undvik att övervattna.",
+                            PlantId = 9
+                        },
+                        new
+                        {
+                            InstructionId = 10,
+                            Instruction = "Ljus och skugga",
+                            NameOfInstruction = "Placera i soligt eller delvis skuggigt läge.",
+                            PlantId = 10
+                        },
+                        new
+                        {
+                            InstructionId = 11,
+                            Instruction = "Jord och placering",
+                            NameOfInstruction = "Kräver fuktig jord och undvik direkt solljus.",
+                            PlantId = 11
+                        },
+                        new
+                        {
+                            InstructionId = 12,
+                            Instruction = "Jord och Vattning",
+                            NameOfInstruction = "Trivs i sur jord och behöver regelbunden vattning.",
+                            PlantId = 12
                         });
                 });
 
@@ -133,7 +188,7 @@ namespace GreenThumbVg.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlantId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlantId"), 1L, 1);
 
                     b.Property<string>("NameOfPlant")
                         .IsRequired()
@@ -158,6 +213,51 @@ namespace GreenThumbVg.Migrations
                         {
                             PlantId = 3,
                             NameOfPlant = "Tulips"
+                        },
+                        new
+                        {
+                            PlantId = 4,
+                            NameOfPlant = "Lavendel"
+                        },
+                        new
+                        {
+                            PlantId = 5,
+                            NameOfPlant = "Prästkrage"
+                        },
+                        new
+                        {
+                            PlantId = 6,
+                            NameOfPlant = "Pioner"
+                        },
+                        new
+                        {
+                            PlantId = 7,
+                            NameOfPlant = "Orkideer"
+                        },
+                        new
+                        {
+                            PlantId = 8,
+                            NameOfPlant = "Solsikka"
+                        },
+                        new
+                        {
+                            PlantId = 9,
+                            NameOfPlant = "Dahlia"
+                        },
+                        new
+                        {
+                            PlantId = 10,
+                            NameOfPlant = "Fuschia"
+                        },
+                        new
+                        {
+                            PlantId = 11,
+                            NameOfPlant = "Hortensia"
+                        },
+                        new
+                        {
+                            PlantId = 12,
+                            NameOfPlant = "Solsikka"
                         });
                 });
 
@@ -168,7 +268,7 @@ namespace GreenThumbVg.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -186,7 +286,7 @@ namespace GreenThumbVg.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "lösenord",
+                            Password = "q52AHJxFaoKjrpR57MFWAQ==",
                             Username = "användarnamn"
                         });
                 });

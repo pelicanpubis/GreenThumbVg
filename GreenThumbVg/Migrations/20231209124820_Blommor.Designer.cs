@@ -3,6 +3,7 @@ using GreenThumbVg.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenThumbVg.Migrations
 {
     [DbContext(typeof(GreenThumbVgDbContext))]
-    partial class GreenThumbVgDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231209124820_Blommor")]
+    partial class Blommor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,62 +123,6 @@ namespace GreenThumbVg.Migrations
                             Instruction = "Klipp bort döda eller sjuka blad och kvistar för att främja tillväxt och hålla växterna friska. Det kan också bidra till att forma växten på ett snyggt sätt.",
                             NameOfInstruction = "Beskärning",
                             PlantId = 4
-                        },
-                        new
-                        {
-                            InstructionId = 5,
-                            Instruction = "Vattna regelbundet och se till ordentlig dränering.",
-                            NameOfInstruction = "Vattning",
-                            PlantId = 5
-                        },
-                        new
-                        {
-                            InstructionId = 6,
-                            Instruction = "Placera i väldränerad jord och delvis solsken.",
-                            NameOfInstruction = "Sol",
-                            PlantId = 6
-                        },
-                        new
-                        {
-                            InstructionId = 7,
-                            Instruction = "Plantera i soligt läge och väldränerad jord.",
-                            NameOfInstruction = "Placering och Jord",
-                            PlantId = 7
-                        },
-                        new
-                        {
-                            InstructionId = 8,
-                            Instruction = "Ljus och Skugga",
-                            NameOfInstruction = "Placera i ljus men undvik direkt solljus.",
-                            PlantId = 8
-                        },
-                        new
-                        {
-                            InstructionId = 9,
-                            Instruction = "Vattning",
-                            NameOfInstruction = "Vattna regelbundet och undvik att övervattna.",
-                            PlantId = 9
-                        },
-                        new
-                        {
-                            InstructionId = 10,
-                            Instruction = "Ljus och skugga",
-                            NameOfInstruction = "Placera i soligt eller delvis skuggigt läge.",
-                            PlantId = 10
-                        },
-                        new
-                        {
-                            InstructionId = 11,
-                            Instruction = "Jord och placering",
-                            NameOfInstruction = "Kräver fuktig jord och undvik direkt solljus.",
-                            PlantId = 11
-                        },
-                        new
-                        {
-                            InstructionId = 12,
-                            Instruction = "Jord och Vattning",
-                            NameOfInstruction = "Trivs i sur jord och behöver regelbunden vattning.",
-                            PlantId = 12
                         });
                 });
 
@@ -236,26 +182,6 @@ namespace GreenThumbVg.Migrations
                         {
                             PlantId = 8,
                             NameOfPlant = "Solsikka"
-                        },
-                        new
-                        {
-                            PlantId = 9,
-                            NameOfPlant = "Dahlia"
-                        },
-                        new
-                        {
-                            PlantId = 10,
-                            NameOfPlant = "Fuschia"
-                        },
-                        new
-                        {
-                            PlantId = 11,
-                            NameOfPlant = "Hortensia"
-                        },
-                        new
-                        {
-                            PlantId = 12,
-                            NameOfPlant = "Maskros"
                         });
                 });
 
