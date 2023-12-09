@@ -144,6 +144,7 @@ namespace GreenThumbVg
                 // Öppna PlantDetailsWindow och skicka med den valda växtens information
                 PlantDetailsWindow plantDetailsWindow = new PlantDetailsWindow(selectedPlant);
                 plantDetailsWindow.Show();
+                this.Close();
             }
             else
             {
@@ -170,7 +171,7 @@ namespace GreenThumbVg
             MainWindow mainWindow = new();
             mainWindow.Show();
             UserManager.SignOutUser();
-            Close();
+            this.Close();
         }
     }
 }
