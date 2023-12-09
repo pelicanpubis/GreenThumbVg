@@ -39,15 +39,20 @@ namespace GreenThumbVg
             InitializeComponent();
             txtName.Text = plantDetails.NameOfPlant; // Visar växtnamnet i fönstret
             selectedPlant = plantDetails;  // Sätter den valda växten
+            
+
 
 
 
             // Hämtar instruktioner för den specifika växten från databasen och visar dem i fönstret
             using (GreenThumbVgDbContext context = new GreenThumbVgDbContext())
             {
+
+
                 var instructionsForPlant = context.Instructions
                     .Where(instruction => instruction.PlantId == plantDetails.PlantId)
                     .ToList();
+
 
                 // Skapar en text av instruktionerna och visar dem i textrutan i fönstret
                 string instructionsText = string.Join(Environment.NewLine, instructionsForPlant.Select(instruction => instruction.Instruction));

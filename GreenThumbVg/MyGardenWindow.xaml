@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbVg"
         mc:Ignorable="d"
-      Title="My Garden Window" Height="450" Width="800" Background="BlanchedAlmond" ResizeMode="NoResize">
+      Title="My Garden Window" Height="450" Width="800" Background="BlanchedAlmond" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/1509473744353.jpg"/>
+            <ImageBrush ImageSource="/garden.jpg"/>
         </Grid.Background>
         <!--Grid-->
         <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
   Content="My Garden Plants"
   FontSize="16"
   Padding="0"
-  VerticalAlignment="Top" Margin="0,10,108,0"/>
+  VerticalAlignment="Top" Margin="0,10,108,0" FontWeight="Bold"/>
 
 
      

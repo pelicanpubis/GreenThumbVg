@@ -7,7 +7,10 @@
         mc:Ignorable="d"
                          Title="MainWindow" Height="450" Width="800" Background="LightGreen" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/garden.jpg"/>
+        </Grid.Background>
+
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -26,16 +29,21 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="UltraBold" Foreground="White" Content="GreenThumb" FontFamily="Arial"/>
-        <Label  Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Content="Username"/>
-        <Label  Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Content="Password"/>
+
+
+
+        <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="30" FontWeight="UltraBold" Foreground="Black" Content="GreenThumb" FontFamily="Arial" Margin="165,65,0,0" Grid.RowSpan="2" Width="283" Grid.ColumnSpan="3"/>
+
+
+            <Label  Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Username" FontWeight="Bold" FontSize="16" Margin="65,0,0,0"/>
+        <Label  Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Password" FontSize="16" FontWeight="Bold" Margin="65,86,0,0" Grid.RowSpan="2"/>
 
 
         <TextBox Name="txtUsername" Grid.Column="3" Grid.Row="2" Height="20" VerticalContentAlignment="Center"/>
-        <PasswordBox Name="txtPassword" Grid.Column="3" Grid.Row="3" Height="20" VerticalContentAlignment="Center"/>
+        <PasswordBox Name="txtPassword" Grid.Column="3" Grid.Row="3" Height="20" VerticalContentAlignment="Center" Margin="0,0,0,78"/>
 
-        <Button Name="btnRegister" Grid.Column="2" Grid.Row="4" Background="Transparent" Height="20" Width="50" BorderBrush="Transparent" Content="Register" Foreground="MediumSpringGreen" Click="btnRegister_Click"/>
-        <Button Name="btnSignIn" Grid.Column="3" Grid.Row="4" Background="Transparent"  Height="20" Width="50" BorderBrush="Transparent" Content="Sign In" Foreground="MediumSpringGreen" Click="btnSignIn_Click"  />
+        <Button Name="btnRegister" Grid.Column="3" Grid.Row="3" Background="LightPink" Height="20" Width="50" BorderBrush="Transparent" Content="Register" Foreground="Black" Click="btnRegister_Click" Margin="10,67,125,10"/>
+        <Button Name="btnSignIn" Grid.Column="3" Grid.Row="3" Background="LightPink"  Height="20" Width="50" BorderBrush="Transparent" Content="Sign In" Foreground="Black" Click="btnSignIn_Click" Margin="122,67,13,10"  />
 
     </Grid>
 </Window>

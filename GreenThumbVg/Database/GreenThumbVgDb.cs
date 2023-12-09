@@ -46,13 +46,7 @@ namespace GreenThumbVg.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.UseEncryption(_provider);
-
-
-
-
+        
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.UseEncryption(_provider);
@@ -62,49 +56,7 @@ namespace GreenThumbVg.Database
             modelBuilder.Entity<GardenPlant>()
                 .HasKey(gp => new { gp.GardenId, gp.PlantId });
 
-
-            //    modelBuilder.Entity<GardenPlant>()
-            //.HasOne(gp => gp.Garden)
-            //.WithMany(g => g.GardenPlants)
-            //.HasForeignKey(gp => gp.GardenId);
-
-            //    modelBuilder.Entity<GardenPlant>()
-            //        .HasOne(gp => gp.Plant)
-            //        .WithMany(p => p.GardenPlants)
-            //        .HasForeignKey(gp => gp.PlantId);
-
-
-            //modelBuilder.Entity<GardenPlant>()
-            //    .HasOne(gp => gp.Garden)
-            //    .WithMany(g => g.GardenPlants)
-            //    .HasForeignKey(gp => gp.GardenId);
-
-            //modelBuilder.Entity<GardenPlant>()
-            //    .HasOne(gp => gp.Plant)
-            //    .WithMany(p => p.GardenPlants)
-            //    .HasForeignKey(gp => gp.PlantId);
-
-            //modelBuilder.Entity<GardenModel>()
-            //    .HasOne(g => g.User)
-            //    .WithOne(u => u.Garden)
-            //    .HasForeignKey<User.User>(u => u.Id);
-
-            //modelBuilder.Entity<InstructionModel>()
-            //    .HasOne(i => i.Plant)
-            //    .WithMany(p => p.Instructions)
-            //    .HasForeignKey(i => i.PlantId);
-
-            //modelBuilder.Entity<PlantModel>()
-            //    .HasIndex(p => p.NameOfPlant)
-            //    .IsUnique();
-
-
-
-
-
-
-
-
+    
 
             // Seedar databasen med  data för PlantModel och InstructionModel
             modelBuilder.Entity<PlantModel>().HasData(
@@ -120,9 +72,6 @@ namespace GreenThumbVg.Database
                 new PlantModel("Fuschia") { PlantId = 10 },
                 new PlantModel("Hortensia") { PlantId = 11 },
                 new PlantModel("Maskros") { PlantId = 12 }
-
-
-
 
 
             );
@@ -248,8 +197,6 @@ namespace GreenThumbVg.Database
         Password = "lösenord", // Lösenordet för den fördefinierade användaren
     }
 );
-
-
 
 
 

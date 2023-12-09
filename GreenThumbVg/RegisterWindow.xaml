@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow"  WindowStartupLocation="CenterScreen" Height="350" Width="600" Background="LightCoral">
     <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/garden.jpg"/>
+        </Grid.Background>
         <!--Grid-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -27,9 +31,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <!-- Elements -->
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Sign Up!" FontSize="24" FontWeight="Bold" Foreground="AntiqueWhite"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Text="Username" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" Text="Password" Foreground="White" FontWeight="Bold"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Sign Up!" FontSize="24" FontWeight="Bold" Foreground="Black"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Text="Username" Foreground="Black" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <TextBlock Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" Text="Password" Foreground="Black" FontWeight="Bold"/>
 
         <TextBlock Name="warnUsername" Grid.Column="1" Grid.Row="4" Text="Username is missing" Foreground="Red" VerticalAlignment="Top" Visibility="Hidden"/>
         <TextBlock Name="warnPassword" Grid.Column="2" Grid.Row="4" Text="A password is missing!" Foreground="Red" VerticalAlignment="Top" Visibility="Hidden"/>
@@ -37,6 +41,18 @@
         <TextBox Name="txtUsername" Grid.Column="1" Grid.Row="3" Height="20" Margin="0 0 10 0"/>
         <PasswordBox Name="txtPassword" Grid.Column="2" Grid.Row="3" Height="20" ToolTip="Enter your password"/>
 
-        <Button Name="btnSignUp" Grid.Column="2" Grid.Row="6" Margin="5" Content="Sign Up!" Background="DarkSeaGreen" FontWeight="Bold" Foreground="SlateBlue" Click="btnSignUp_Click"/>
+        <Button 
+   Name="btnGoBack"
+   Grid.Column="1"
+   Grid.Row="6"
+   Content="Go Back"
+   FontSize="12"
+   Background="LightPink"
+   Margin="0,5,20,5"
+            FontWeight="Bold" Click="btnGoBack_Click"/>
+
+
+
+        <Button Name="btnSignUp" Grid.Column="2" Grid.Row="6" Margin="5" Content="Sign Up!" Background="LightPink" FontWeight="Bold" Foreground="Black" Click="btnSignUp_Click"/>
     </Grid>
 </Window>
