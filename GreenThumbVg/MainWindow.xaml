@@ -7,6 +7,7 @@
         mc:Ignorable="d"
                          Title="MainWindow" Height="450" Width="800" Background="LightGreen" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
+        
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>

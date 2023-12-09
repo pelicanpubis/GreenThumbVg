@@ -7,6 +7,9 @@
         mc:Ignorable="d"
       Title="My Garden Window" Height="450" Width="800" Background="BlanchedAlmond" ResizeMode="NoResize">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/1509473744353.jpg"/>
+        </Grid.Background>
         <!--Grid-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
