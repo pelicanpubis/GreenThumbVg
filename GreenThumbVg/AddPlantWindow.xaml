@@ -103,7 +103,6 @@
             Margin="103,39,1,49" Grid.Row="1"/>
 
 
-        <!-- Valideringsmeddelanden (om några) -->
 
         <TextBlock 
             x:Name="txtValidationMessage"
@@ -113,27 +112,26 @@
             Foreground="Red"
             Margin="0 5 0 0"/>
 
-        <!-- Beställningsknapp -->
 
 
         <Button
     Name="btnAddInstruction"
-    Grid.Column="4"
+    Grid.Column="3"
     Grid.Row="6"
     Content="Add Instruction"
     FontSize="12"
     Background="LightPink"
-    Margin="1,10,19,10" Click="btnAddInstruction_Click"/>
+    Margin="10,10,10,10" Click="btnAddInstruction_Click"/>
 
 
         <Button 
       Name="btnGoBack"
-      Grid.Column="1"
+      Grid.Column="7"
       Grid.Row="8"
       Content="Plant Window"
       FontSize="12"
       Background="LightPink"
-      Margin="10,5,10,15" Click="btnGoBack_Click"/>
+      Margin="10,20,10,0" Click="btnGoBack_Click"/>
 
     </Grid>
 </Window>
